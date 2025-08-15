@@ -1,0 +1,43 @@
+# Task ID: 3
+# Title: Implement Model Configuration Form
+# Status: pending
+# Dependencies: 2
+# Priority: high
+# Description: Create form interface for detailed model parameter tuning with Gemini models using Shadcn/UI form components
+# Details:
+Build configuration form using Shadcn/UI form components with TypeScript interfaces. Include model selection (Gemini 2.0 Flash, Gemini 2.5 Flash, Gemini 2.5 Pro) using Select component, reasoning dropdown (Auto, 0, Max), search checkbox, temperature slider (0-2, default 0.2) using Slider component, max tokens slider (100-8192, default 2048). Use controlled inputs with strict TypeScript interfaces and form validation using react-hook-form integration.
+
+# Test Strategy:
+Test all Shadcn/UI form controls work correctly, validation is applied, default values are set, and TypeScript provides proper type safety
+
+# Subtasks:
+## 1. Create TypeScript interfaces for model configuration [pending]
+### Dependencies: None
+### Description: Define strongly-typed interfaces for Gemini model configurations, form data, and validation schemas
+### Details:
+Create interfaces for GeminiModels enum ('gemini-2.0-flash-exp', 'gemini-2.0-flash-thinking-exp-1219', 'gemini-2.0-flash-thinking-exp-01-21', 'gemini-exp-1206', 'gemini-2.5-flash-exp', 'gemini-2.5-pro-exp'), ReasoningOptions ('Auto', '0', 'Max'), and ModelConfiguration interface containing model, reasoning, search, temperature (0-2), and maxTokens (100-8192) fields. Include form validation schema types for react-hook-form integration.
+
+## 2. Install and configure required dependencies [pending]
+### Dependencies: None
+### Description: Add react-hook-form and additional Shadcn/UI components needed for the form
+### Details:
+Install react-hook-form and @hookform/resolvers for form handling. Add Shadcn/UI components: Form, Select, Checkbox, Slider, and Label components using npx shadcn add command. Ensure all components are properly configured with the existing Shadcn/UI setup and Tailwind CSS.
+
+## 3. Create ModelConfigurationForm component structure [pending]
+### Dependencies: 3.1, 3.2
+### Description: Build the main form component using react-hook-form with TypeScript integration
+### Details:
+Create ModelConfigurationForm component using useForm hook with TypeScript generics for type safety. Set up form schema validation and default values (Gemini 2.0 Flash, Auto reasoning, search enabled, temperature 0.2, maxTokens 2048). Structure the component with proper form wrapper using Shadcn/UI Form component and implement controlled inputs pattern.
+
+## 4. Implement form controls with Shadcn/UI components [pending]
+### Dependencies: 3.3
+### Description: Add all form input controls using Shadcn/UI components with proper TypeScript bindings
+### Details:
+Implement Select component for model selection with Gemini options, Select for reasoning dropdown (Auto/0/Max), Checkbox for search toggle, Slider for temperature (0-2 range, step 0.1), and Slider for max tokens (100-8192 range, step 100). Use FormField, FormItem, FormLabel, FormControl, and FormMessage components for proper form structure. Ensure all controls are controlled via react-hook-form.
+
+## 5. Add form validation and submission handling [pending]
+### Dependencies: 3.4
+### Description: Implement comprehensive form validation and submission logic with TypeScript type safety
+### Details:
+Add validation rules for all form fields using react-hook-form validation schema. Implement form submission handler with TypeScript types that processes the configuration data. Add error handling and display validation messages using Shadcn/UI FormMessage components. Include form reset functionality and proper error state management.
+

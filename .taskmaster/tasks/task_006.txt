@@ -1,0 +1,43 @@
+# Task ID: 6
+# Title: Implement State Management
+# Status: pending
+# Dependencies: 2, 5
+# Priority: high
+# Description: Set up centralized state management for configurations, prompts, and experiment data with TypeScript support
+# Details:
+Use Zustand for state management with TypeScript interfaces for type safety. Create strongly-typed stores for configurations array, current prompt with placeholders, and experiment results. Define comprehensive TypeScript interfaces for all state shapes. Ensure state persists during navigation between pages and integrates well with Vite's development environment.
+
+# Test Strategy:
+Verify state is shared across components, persists during page navigation, and TypeScript provides compile-time type checking for all state operations
+
+# Subtasks:
+## 1. Install Zustand and Set Up TypeScript Interfaces [pending]
+### Dependencies: None
+### Description: Install Zustand state management library and create comprehensive TypeScript interfaces for all state shapes
+### Details:
+Install zustand via npm/yarn and create a types.ts file in src/types/ directory. Define TypeScript interfaces for ConfigurationData (model selection, parameters), PromptData (prompt text, placeholders), ExperimentData (results, status), and AppState (combines all state types). Include proper typing for Gemini model configurations, experiment results, and validation states.
+
+## 2. Create Configuration Store with Zustand [pending]
+### Dependencies: 6.1
+### Description: Implement strongly-typed Zustand store for managing model configurations array
+### Details:
+Create src/stores/configurationStore.ts using Zustand with TypeScript. Implement state for configurations array, actions for addConfiguration, updateConfiguration, deleteConfiguration, and validateConfigurations. Include persist middleware to maintain state across page refreshes. Integrate with existing TypeScript interfaces and ensure compatibility with Vite's development environment.
+
+## 3. Create Prompt Store with Zustand [pending]
+### Dependencies: 6.1
+### Description: Implement strongly-typed Zustand store for managing current prompt and placeholders
+### Details:
+Create src/stores/promptStore.ts using Zustand with TypeScript. Implement state for current prompt text, placeholders array, and prompt validation status. Include actions for setPrompt, addPlaceholder, removePlaceholder, and validatePrompt. Use persist middleware for state persistence and ensure proper TypeScript integration with defined interfaces.
+
+## 4. Create Experiment Store with Zustand [pending]
+### Dependencies: 6.1
+### Description: Implement strongly-typed Zustand store for managing experiment data and results
+### Details:
+Create src/stores/experimentStore.ts using Zustand with TypeScript. Implement state for experiment results, loading states, error states, and execution status. Include actions for startExperiment, updateResults, setLoading, setError, and clearResults. Use TypeScript interfaces for type safety and integrate with persist middleware for result persistence.
+
+## 5. Create Global Store Provider and Integration [pending]
+### Dependencies: 6.2, 6.3, 6.4
+### Description: Create a global store provider that combines all stores and integrate with existing React components
+### Details:
+Create src/stores/index.ts that exports all stores and a useStores hook for convenient access. Create a StoreProvider component if needed for context sharing. Update App.tsx to integrate with the store system and ensure all stores work together. Test store interactions and verify state sharing across components works correctly with TypeScript support.
+

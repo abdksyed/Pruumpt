@@ -1,0 +1,43 @@
+# Task ID: 7
+# Title: Build API Integration Layer
+# Status: pending
+# Dependencies: 6
+# Priority: high
+# Description: Create service layer for making parallel API calls to localhost:8055 with full TypeScript support
+# Details:
+Implement API service using fetch with TypeScript types and interfaces for all requests/responses. Make POST requests to /run_single_model endpoint with proper typing. Handle parallel requests for multiple configurations using Promise.all with TypeScript generics. Implement request management with retry logic (retry up to 2 times for failed requests) using typed error handling. Define comprehensive TypeScript interfaces for request/response objects and error states.
+
+# Test Strategy:
+Test API calls work correctly, parallel requests execute properly, retry logic handles failures, and TypeScript prevents runtime type errors
+
+# Subtasks:
+## 1. Define TypeScript API interfaces and types [pending]
+### Dependencies: None
+### Description: Create comprehensive TypeScript interfaces for API request/response objects, error states, and configuration types used in the API integration layer
+### Details:
+Create src/types/api.ts with interfaces for API requests to localhost:8055/run_single_model endpoint. Define ModelConfiguration interface with Gemini model types, reasoning options, search settings, temperature, and max tokens. Create APIRequest interface with configuration and prompt fields. Define APIResponse interface with result data and metadata. Include APIError interface with error codes, messages, and retry information. Create RetryOptions interface for configuring retry logic.
+
+## 2. Implement base API service class with fetch wrapper [pending]
+### Dependencies: 7.1
+### Description: Create core API service class that handles HTTP requests to localhost:8055 with proper TypeScript typing and error handling
+### Details:
+Create src/services/apiService.ts with BaseAPIService class. Implement typed fetch wrapper method that accepts generic types for request/response. Add proper error handling for network failures, HTTP status codes, and JSON parsing errors. Include request timeout configuration and proper TypeScript return types. Set up base URL configuration for localhost:8055 and common headers. Implement logging for debugging API calls.
+
+## 3. Add retry logic with exponential backoff [pending]
+### Dependencies: 7.2
+### Description: Implement robust retry mechanism that attempts failed requests up to 2 times with proper TypeScript error handling
+### Details:
+Extend BaseAPIService with retry functionality using exponential backoff strategy. Implement retryRequest method that accepts retry options and uses TypeScript generics. Add configurable delay between retries (starting at 1000ms, doubling each attempt). Include proper error aggregation that maintains original error types. Add retry counter and logging for debugging. Ensure retry logic respects TypeScript error interfaces and provides proper error context.
+
+## 4. Implement parallel API request manager [pending]
+### Dependencies: 7.3
+### Description: Create service methods for executing multiple API requests concurrently using Promise.all with full TypeScript generics support
+### Details:
+Add runParallelRequests method to APIService that accepts array of ModelConfiguration objects and returns Promise<APIResponse[]>. Use Promise.all with proper TypeScript generics to maintain type safety. Implement Promise.allSettled fallback for partial failure scenarios. Add request batching logic that can handle 1-8 concurrent requests. Include proper error handling that distinguishes between individual request failures and batch failures. Ensure all responses maintain proper TypeScript typing.
+
+## 5. Create main API integration service with run_single_model endpoint [pending]
+### Dependencies: 7.4
+### Description: Implement the primary service interface for making POST requests to /run_single_model endpoint with complete TypeScript integration
+### Details:
+Create ModelAPIService class that extends the base service functionality. Implement runSingleModel method that accepts ModelConfiguration and prompt, makes POST to /run_single_model endpoint. Add runMultipleModels method that leverages parallel request manager for multiple configurations. Include proper request body formatting with TypeScript validation. Add response parsing and validation using defined TypeScript interfaces. Export main service instance for use throughout the application.
+

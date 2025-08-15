@@ -1,0 +1,43 @@
+# Task ID: 4
+# Title: Add Configuration Presets System
+# Status: pending
+# Dependencies: 3
+# Priority: medium
+# Description: Implement preset buttons for one-click configuration setup using Shadcn/UI components
+# Details:
+Create TypeScript interfaces for preset configurations like 'Gemini-2.5-Flash-Search' with predefined values. Add preset buttons using Shadcn/UI Button variants that automatically populate a new configuration slot when clicked. Store presets as typed constants or configuration objects with proper TypeScript definitions.
+
+# Test Strategy:
+Verify preset buttons add correct configurations with proper default values and TypeScript type checking prevents configuration errors
+
+# Subtasks:
+## 1. Create TypeScript Configuration Preset Interfaces [pending]
+### Dependencies: None
+### Description: Define TypeScript interfaces and types for configuration presets including model parameters, search settings, and metadata
+### Details:
+Create a types/presets.ts file with interfaces for ModelConfiguration (model, reasoning, search, temperature, maxTokens), ConfigurationPreset (id, name, description, configuration), and PresetCategory. Define union types for model names (Gemini 2.0 Flash, Gemini 2.5 Flash, Gemini 2.5 Pro) and reasoning levels (Auto, 0, Max). Use strict TypeScript typing to ensure type safety.
+
+## 2. Define Preset Configuration Constants [pending]
+### Dependencies: 4.1
+### Description: Create predefined preset configurations with default values for popular model setups like Gemini-2.5-Flash-Search
+### Details:
+Create constants/presets.ts file with typed preset objects including: Gemini-2.5-Flash-Search (Gemini 2.5 Flash, Auto reasoning, search enabled, temp 0.2, tokens 2048), Gemini-2.0-Flash-Basic (Gemini 2.0 Flash, 0 reasoning, no search, temp 0.1, tokens 1024), Gemini-2.5-Pro-Advanced (Gemini 2.5 Pro, Max reasoning, search enabled, temp 0.4, tokens 4096). Export as readonly array with proper TypeScript typing.
+
+## 3. Create Preset Selection Component [pending]
+### Dependencies: 4.2
+### Description: Build a React component displaying preset buttons using Shadcn/UI Button variants with icons and descriptions
+### Details:
+Create components/PresetSelector.tsx using Shadcn/UI Button component with 'outline' variant. Display presets in a grid layout with each button showing preset name, model type, and key features (search enabled, reasoning level). Use lucide-react icons for visual indicators (Zap for fast models, Brain for reasoning, Search for search-enabled). Implement responsive design with proper spacing using Tailwind CSS.
+
+## 4. Implement Preset Button Click Handler [pending]
+### Dependencies: 4.3
+### Description: Add click functionality to preset buttons that populates configuration form with preset values
+### Details:
+Implement handlePresetClick function that takes a ConfigurationPreset and calls parent component's onPresetSelect callback. The callback should populate a new configuration slot with preset values: model selection, reasoning dropdown, search checkbox, temperature slider, and max tokens slider. Ensure the handler validates the preset data and handles edge cases like maximum configurations reached (8 limit).
+
+## 5. Integrate Preset System with Configuration Page [pending]
+### Dependencies: 4.4
+### Description: Connect the preset selector to the main configuration page and handle state management for adding preset configurations
+### Details:
+Integrate PresetSelector component into the main configuration page above the configuration list. Implement state management to handle adding new configurations from presets while respecting the 8-configuration limit. Add transition animations using Tailwind CSS when new configurations are added. Ensure proper TypeScript typing for all state updates and callback functions. Handle edge cases like duplicate configurations and validation errors.
+

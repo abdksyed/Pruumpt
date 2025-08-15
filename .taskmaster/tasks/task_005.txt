@@ -1,0 +1,43 @@
+# Task ID: 5
+# Title: Create Prompt Engineering Page
+# Status: pending
+# Dependencies: 1
+# Priority: high
+# Description: Build dedicated prompt input area with placeholder support for batch testing using Shadcn/UI components
+# Details:
+Create PromptsPage component using Shadcn/UI Textarea for prompt input with TypeScript types. Implement placeholder system with {{variable}} syntax detection using TypeScript string parsing. Add UI for defining placeholder key-value pairs using Shadcn/UI Table component or form interface for CSV-like input with proper TypeScript interfaces for data structures.
+
+# Test Strategy:
+Test prompt text area accepts input, placeholders are detected and can be configured, and TypeScript ensures type safety for placeholder data structures
+
+# Subtasks:
+## 1. Create PromptsPage component and set up file structure [pending]
+### Dependencies: None
+### Description: Create the main PromptsPage component in src/pages/PromptsPage.tsx with basic layout and TypeScript interfaces
+### Details:
+Create src/pages directory and PromptsPage.tsx file. Set up basic component structure with React functional component and export. Define initial TypeScript interfaces for prompt data and placeholder variables. Import necessary dependencies from React and set up component props typing.
+
+## 2. Implement Textarea component for prompt input [pending]
+### Dependencies: 5.1
+### Description: Add Shadcn/UI Textarea component for prompt input with proper TypeScript integration
+### Details:
+Install and configure Shadcn/UI Textarea component. Create controlled textarea input with TypeScript state management for prompt text. Implement onChange handlers with proper typing. Add placeholder text and styling consistent with existing Shadcn/UI components. Ensure textarea is resizable and has appropriate minimum height.
+
+## 3. Build placeholder detection and parsing system [pending]
+### Dependencies: 5.2
+### Description: Implement {{variable}} syntax detection using TypeScript string parsing and regular expressions
+### Details:
+Create utility functions to parse prompt text and extract placeholder variables using regex pattern /\{\{([^}]+)\}\}/g. Implement TypeScript interfaces for placeholder data structure including variable name and value fields. Add real-time parsing that updates when prompt text changes. Create validation for placeholder syntax and duplicate detection.
+
+## 4. Create placeholder configuration UI using Shadcn/UI Table [pending]
+### Dependencies: 5.3
+### Description: Build interface for defining placeholder key-value pairs using Shadcn/UI Table component
+### Details:
+Install and implement Shadcn/UI Table component for displaying detected placeholders. Create table with columns for variable name and value input. Add Shadcn/UI Input components for value entry with proper TypeScript form handling. Implement add/remove functionality for manual placeholder management. Include validation for required placeholders and data consistency.
+
+## 5. Integrate components and implement batch testing interface [pending]
+### Dependencies: 5.1, 5.2, 5.3, 5.4
+### Description: Connect prompt input, placeholder detection, and configuration UI into cohesive prompt engineering interface
+### Details:
+Integrate all components into PromptsPage with proper state management using React hooks and TypeScript. Implement CSV-like input interface for batch placeholder values. Add preview functionality showing resolved prompts with placeholder substitutions. Create export/import functionality for prompt templates. Ensure responsive layout and proper error handling.
+

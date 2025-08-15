@@ -1,0 +1,101 @@
+### **Product Requirements Document: AI Experiment Workbench**
+**Version:** 1.0
+**Date:** August 14, 2025
+**Author:** abdksyed
+**Status:** Final Draft
+
+---
+
+### **1. Overview**
+* **Problem:** AI and software developers need to iterate on prompts to improve the quality, consistency, and reliability of outputs from large language models. The current process involves manually running the same prompt across different models and configurations, which is slow, inefficient, and makes objective comparison difficult.
+* **Audience:** This feature is for AI/ML engineers and software developers who are building applications on top of generative AI models and are focused on prompt engineering and optimization.
+* **Value:** This product provides a unified interface to run a single prompt against up to eight different model configurations simultaneously. This allows developers to **quickly iterate, compare results side-by-side, and make data-driven decisions** to improve their prompts and select the best model for their task.
+
+---
+
+### **2. Core Features**
+**1. Dynamic Experiment Configuration UI**
+* **What it does:** Provides a dynamic interface for users to create and manage 1 to 8 model configurations. It allows for detailed parameter tuning and offers presets for common setups.
+* **Why it's important:** It gives developers precise control over model behavior in a user-friendly way, allowing for both quick starts with presets and detailed, systematic testing without cluttering the interface.
+* **How it works:**
+    * The UI starts with a single empty configuration slot. Users cannot run an experiment without at least one configuration.
+    * A `+` button allows users to add more configuration slots, up to a maximum of 8.
+    * Each configuration slot displays its settings and has "edit" (pencil) and "delete" (trash) icons for management.
+    * A separate area provides preset buttons (e.g., "Gemini-2.5-Flash-Search"). Clicking a preset automatically adds it as a new configuration slot.
+
+**2. Prompt Engineering Page**
+* **What it does:** Provides a dedicated area for users to write and manage their prompts. It supports placeholders (e.g., `{{variable}}`) for running batch tests with multiple values.
+* **Why it's important:** Decouples prompts from model configurations, allowing for flexible testing. Batch testing with placeholders dramatically speeds up iteration.
+* **How it works:** A text editor for the prompt with a simple UI to define placeholder keys and their corresponding values (e.g., a table for CSV input). When 'Run' is clicked, the prompt and all its placeholder variations are sent with the selected configurations to the backend.
+
+**3. Results Comparison Page**
+* **What it does:** Displays the results of an experiment in a side-by-side tabular view.
+* **Why it's important:** This is the core value delivery. It allows for immediate, direct comparison of outputs and performance metrics, making it easy to identify the best-performing configuration.
+* **How it works:** After a run is initiated, the user is directed to this page. Each of the active configurations gets its own column, displaying the generated text response, token usage, cost, and latency.
+
+---
+
+### **3. User Experience**
+* **User Persona:** "Alex," a Senior Software Engineer at a tech startup. Alex is building a customer service chatbot and needs to find the best model and prompt combination for summarizing support tickets accurately and cheaply.
+* **Key User Flow:**
+    1.  **Configure:** Alex navigates to the "Configuration" page. Alex clicks the "Gemini-2.5-Flash-Search" preset button to add the first config. Alex then clicks the `+` button and manually creates a second configuration for "Gemini 2.0 Flash" with a lower temperature.
+    2.  **Prompt:** Alex goes to the "Prompts" page, and writes a prompt: `Summarize the following support ticket: {{ticket_text}}`. Alex then provides a list of 10 different `ticket_text` values for the placeholder.
+    3.  **Run:** Alex clicks "Run Experiment."
+    4.  **Compare:** The app navigates to the "Runs" page. **Results for each model appear in their respective columns as they are completed by the backend**. A loading spinner will be shown in the columns for runs that are still in progress. Alex can begin comparing the results of the faster models while the slower ones are still running.
+
+---
+
+### **4. Technical Architecture**
+* **System Components:**
+    * **Frontend:** A React/Vite single-page application.
+    * **Backend:** A service running at `localhost:8055`.
+* **APIs and Integrations:** The frontend will make one API call per active configuration. If there are 5 configurations, it will make 5 parallel API calls.
+    * **`POST /run_single_model`**:
+        * **Request Body:** Contains a single model configuration (model name, parameters) and the prompt text.
+        * **Response Body:** Returns a single result object containing the model's output and metadata (tokens, cost, time).
+
+---
+
+### **5. Development Roadmap**
+* **Phase 1 (MVP):**
+    * Build the dynamic Configuration UI: start with one slot, `+` button to add more (up to 8), delete functionality.
+    * Implement the preset buttons for one-click configuration.
+    * Build a simple prompt text box (placeholder support will be in Phase 2).
+    * Build the Results Page with a basic side-by-side table that can handle streaming results.
+    * Full end-to-end integration for parallel API calls for a single prompt run.
+* **Phase 2 (Enhancements):**
+    * Implement saving and loading for named configuration sets.
+    * Build the full Prompt Engineering Page with placeholder and batch testing support.
+    * Add sorting, filtering, and search capabilities to the Results Page.
+    * Implement "edit" functionality for existing configurations.
+* **Phase 3 (Future Scope):**
+    * User accounts and a persistent history of runs.
+    * Visual charts for comparing performance metrics.
+    * Ability to share experiment results via a public link.
+
+---
+
+### **6. Logical Dependency Chain**
+1.  **Foundation:** Build the basic UI components for a single configuration slot and the prompt input box.
+2.  **Dynamic UI:** Implement the logic to dynamically add/remove configuration slots.
+3.  **Core Logic:** Wire up the "Run Experiment" button to make **parallel API calls** for each configuration and handle the responses individually.
+4.  **Display Results:** Create the Results Page to render responses as they stream in from the API calls. At this point, the core MVP is usable.
+5.  **Iterate:** Add advanced features (saving configs, placeholders, etc.) on top of this working foundation.
+
+---
+
+### **7. Risks and Mitigations**
+* **Risk:** The UI for editing a configuration slot in-place could be complex.
+    * **Mitigation:** For the MVP, "editing" can be simplified to deleting the old config and adding a new, modified one. Full in-place editing can be a Phase 2 enhancement.
+* **Risk:** Managing multiple parallel API requests on the frontend can be complex, especially with error handling.
+    * **Mitigation:** The frontend must implement a robust request management system. A specific retry mechanism (e.g., retry a failed request up to 2 times) should be built for individual model runs. Each column in the results table must independently handle its own loading and error states.
+
+---
+
+### **8. Appendix**
+* **Supported Models:** Gemini 2.0 Flash, Gemini 2.5 Flash, Gemini 2.5 Pro
+* **Supported Parameters:**
+    * Reasoning: [Auto, 0, Max]
+    * Search: Boolean (checkbox)
+    * Temperature: 0-2 (slider, default 0.2)
+    * Max Tokens: 100-8192 (slider, default 2048)

@@ -1,0 +1,1021 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Setup Project Structure and Routing",
+        "description": "Initialize React Router for page navigation between Configuration, Prompts, and Results pages using Vite React TypeScript template",
+        "details": "Install and configure React Router DOM with TypeScript types. Create three main routes: /config, /prompts, and /results. Set up basic layout with navigation using Shadcn/UI components. Update package.json with react-router-dom dependency. Create route components in src/pages/ directory with proper TypeScript interfaces. Configure Vite for optimal routing.",
+        "testStrategy": "Test navigation between pages works correctly, URLs update properly, and TypeScript compilation passes without errors",
+        "priority": "high",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Install and configure React Router DOM with TypeScript",
+            "description": "Install react-router-dom package and its TypeScript types, update package.json",
+            "dependencies": [],
+            "details": "Run npm install react-router-dom @types/react-router-dom to add routing dependencies. Verify installation and ensure TypeScript types are properly recognized by the project configuration.",
+            "status": "done",
+            "testStrategy": "Verify package is listed in package.json and TypeScript compilation shows no import errors for react-router-dom"
+          },
+          {
+            "id": 2,
+            "title": "Create pages directory and route components",
+            "description": "Create src/pages/ directory with ConfigurationPage, PromptsPage, and ResultsPage components with proper TypeScript interfaces",
+            "dependencies": [
+              "1.1"
+            ],
+            "details": "Create src/pages/ConfigurationPage.tsx, src/pages/PromptsPage.tsx, and src/pages/ResultsPage.tsx as functional components with TypeScript. Each should export a default component with proper interface definitions for props. Include basic page structure and placeholder content.",
+            "status": "done",
+            "testStrategy": "Ensure all page components compile without TypeScript errors and can be imported successfully"
+          },
+          {
+            "id": 3,
+            "title": "Set up React Router with BrowserRouter and main routes",
+            "description": "Configure BrowserRouter in main.tsx and create route definitions for /config, /prompts, and /results",
+            "dependencies": [
+              "1.2"
+            ],
+            "details": "Wrap the App component in BrowserRouter in src/main.tsx. Create Routes and Route components in App.tsx for the three main pages: /config (ConfigurationPage), /prompts (PromptsPage), and /results (ResultsPage). Include proper TypeScript imports and route typing.",
+            "status": "pending",
+            "testStrategy": "Test that navigation to each URL renders the correct page component and browser URL updates properly"
+          },
+          {
+            "id": 4,
+            "title": "Create navigation layout with Shadcn/UI components",
+            "description": "Build a navigation header/layout component using Shadcn/UI Button components for routing between pages",
+            "dependencies": [
+              "1.3"
+            ],
+            "details": "Create src/components/Layout.tsx component with navigation using Shadcn/UI Button components and Link components from react-router-dom. Include navigation for Configuration, Prompts, and Results pages. Use consistent styling with existing Shadcn/UI button variants and proper TypeScript interfaces for navigation props.",
+            "status": "pending",
+            "testStrategy": "Verify navigation buttons properly route between pages, active states work correctly, and all Shadcn/UI components render with proper styling"
+          },
+          {
+            "id": 5,
+            "title": "Configure Vite for optimal routing and update App.tsx",
+            "description": "Update Vite configuration for client-side routing and integrate Layout component with route structure",
+            "dependencies": [
+              "1.4"
+            ],
+            "details": "Update vite.config.ts to include fallback routing for SPA mode (historyApiFallback). Refactor App.tsx to use the Layout component and wrap route definitions properly. Ensure the routing structure supports both development and production builds with proper TypeScript configuration.",
+            "status": "pending",
+            "testStrategy": "Test that direct URL navigation works in both dev and build modes, page refreshes maintain correct routes, and TypeScript compilation passes without routing-related errors"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Create Configuration Page Layout",
+        "description": "Build the dynamic configuration UI with add/remove functionality for model configurations using Shadcn/UI components",
+        "details": "Create ConfigurationPage component with TypeScript interfaces for state management of 1-8 configuration slots. Implement add (+) button using Shadcn/UI Button component to add new configurations up to maximum of 8. Add edit (pencil) and delete (trash) icons using Shadcn/UI icons. Define proper TypeScript types for configuration state and props.",
+        "testStrategy": "Verify configurations can be added/removed, maximum of 8 enforced, UI updates correctly, and TypeScript types are properly enforced",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Define TypeScript Interfaces for Configuration State",
+            "description": "Create comprehensive TypeScript interfaces for configuration state management including model configuration structure, configuration array state, and component props",
+            "dependencies": [],
+            "details": "Create types/configuration.ts file defining interfaces: ModelConfiguration (id, name, model, reasoning, search, temperature, maxTokens), ConfigurationPageState (configurations array, maxConfigurations constant), ConfigurationPageProps, and utility types for add/remove operations. Use strict typing following existing project patterns with lucide-react icons and Shadcn/UI component types.",
+            "status": "pending",
+            "testStrategy": "Verify TypeScript compilation passes, all required fields are properly typed, and interfaces support the 1-8 configuration limit constraint"
+          },
+          {
+            "id": 2,
+            "title": "Create ConfigurationPage Component Structure",
+            "description": "Build the main ConfigurationPage React component with proper state management and basic layout structure using Shadcn/UI components",
+            "dependencies": [
+              "2.1"
+            ],
+            "details": "Create components/ConfigurationPage.tsx with useState hook for managing configuration array state (1-8 items). Implement responsive layout using Shadcn/UI components following the new-york style from components.json. Include header section, configuration list container, and action buttons area. Use existing Button component patterns and ensure proper TypeScript integration.",
+            "status": "pending",
+            "testStrategy": "Test component renders correctly, state management works for configuration array, and layout is responsive across different screen sizes"
+          },
+          {
+            "id": 3,
+            "title": "Implement Add Configuration Button with Limit Enforcement",
+            "description": "Add the plus (+) button functionality to create new configurations with maximum limit of 8 enforced using Shadcn/UI Button component",
+            "dependencies": [
+              "2.1",
+              "2.2"
+            ],
+            "details": "Implement addConfiguration function that adds new configuration object to state array. Use Shadcn/UI Button component with plus icon from lucide-react. Disable button when configurations.length >= 8. Add new configuration with default values (empty name, default model selection). Follow existing button variant patterns from button.tsx component.",
+            "status": "pending",
+            "testStrategy": "Verify add button works correctly, maximum 8 configurations enforced, button disabled state works, and new configurations have proper default values"
+          },
+          {
+            "id": 4,
+            "title": "Add Edit and Delete Icons with Click Handlers",
+            "description": "Implement edit (pencil) and delete (trash) icons for each configuration item with proper click handling using lucide-react icons",
+            "dependencies": [
+              "2.2",
+              "2.3"
+            ],
+            "details": "Add Pencil and Trash2 icons from lucide-react to each configuration card/item. Implement editConfiguration and deleteConfiguration functions with proper TypeScript typing. Use icon buttons with hover states following Shadcn/UI patterns. Ensure delete function removes item from array and edit function prepares for inline editing. Style icons consistently with project design system.",
+            "status": "pending",
+            "testStrategy": "Test edit and delete icons are properly positioned, click handlers work correctly, delete removes correct configuration, and icons have appropriate hover/focus states"
+          },
+          {
+            "id": 5,
+            "title": "Create Configuration List Layout and Styling",
+            "description": "Build the visual layout for displaying 1-8 configuration items in a responsive grid/list format using Shadcn/UI styling patterns",
+            "dependencies": [
+              "2.2",
+              "2.4"
+            ],
+            "details": "Create responsive grid layout for configuration cards using Tailwind CSS classes following Shadcn/UI patterns. Each configuration should display as a card with space for model details, edit/delete actions. Use proper spacing, borders, and hover effects consistent with Shadcn/UI new-york style. Ensure layout works well from 1-8 configurations with proper responsive breakpoints.",
+            "status": "pending",
+            "testStrategy": "Verify layout is responsive, configuration cards display properly, grid adapts to different numbers of configurations (1-8), and styling is consistent with Shadcn/UI design system"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Implement Model Configuration Form",
+        "description": "Create form interface for detailed model parameter tuning with Gemini models using Shadcn/UI form components",
+        "details": "Build configuration form using Shadcn/UI form components with TypeScript interfaces. Include model selection (Gemini 2.0 Flash, Gemini 2.5 Flash, Gemini 2.5 Pro) using Select component, reasoning dropdown (Auto, 0, Max), search checkbox, temperature slider (0-2, default 0.2) using Slider component, max tokens slider (100-8192, default 2048). Use controlled inputs with strict TypeScript interfaces and form validation using react-hook-form integration.",
+        "testStrategy": "Test all Shadcn/UI form controls work correctly, validation is applied, default values are set, and TypeScript provides proper type safety",
+        "priority": "high",
+        "dependencies": [
+          2
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create TypeScript interfaces for model configuration",
+            "description": "Define strongly-typed interfaces for Gemini model configurations, form data, and validation schemas",
+            "dependencies": [],
+            "details": "Create interfaces for GeminiModels enum ('gemini-2.0-flash-exp', 'gemini-2.0-flash-thinking-exp-1219', 'gemini-2.0-flash-thinking-exp-01-21', 'gemini-exp-1206', 'gemini-2.5-flash-exp', 'gemini-2.5-pro-exp'), ReasoningOptions ('Auto', '0', 'Max'), and ModelConfiguration interface containing model, reasoning, search, temperature (0-2), and maxTokens (100-8192) fields. Include form validation schema types for react-hook-form integration.",
+            "status": "pending",
+            "testStrategy": "Verify TypeScript compilation passes with strict mode and all interface properties are properly typed"
+          },
+          {
+            "id": 2,
+            "title": "Install and configure required dependencies",
+            "description": "Add react-hook-form and additional Shadcn/UI components needed for the form",
+            "dependencies": [],
+            "details": "Install react-hook-form and @hookform/resolvers for form handling. Add Shadcn/UI components: Form, Select, Checkbox, Slider, and Label components using npx shadcn add command. Ensure all components are properly configured with the existing Shadcn/UI setup and Tailwind CSS.",
+            "status": "pending",
+            "testStrategy": "Verify all dependencies install correctly and Shadcn/UI components can be imported without errors"
+          },
+          {
+            "id": 3,
+            "title": "Create ModelConfigurationForm component structure",
+            "description": "Build the main form component using react-hook-form with TypeScript integration",
+            "dependencies": [
+              "3.1",
+              "3.2"
+            ],
+            "details": "Create ModelConfigurationForm component using useForm hook with TypeScript generics for type safety. Set up form schema validation and default values (Gemini 2.0 Flash, Auto reasoning, search enabled, temperature 0.2, maxTokens 2048). Structure the component with proper form wrapper using Shadcn/UI Form component and implement controlled inputs pattern.",
+            "status": "pending",
+            "testStrategy": "Test form initialization with default values and TypeScript type checking for form data"
+          },
+          {
+            "id": 4,
+            "title": "Implement form controls with Shadcn/UI components",
+            "description": "Add all form input controls using Shadcn/UI components with proper TypeScript bindings",
+            "dependencies": [
+              "3.3"
+            ],
+            "details": "Implement Select component for model selection with Gemini options, Select for reasoning dropdown (Auto/0/Max), Checkbox for search toggle, Slider for temperature (0-2 range, step 0.1), and Slider for max tokens (100-8192 range, step 100). Use FormField, FormItem, FormLabel, FormControl, and FormMessage components for proper form structure. Ensure all controls are controlled via react-hook-form.",
+            "status": "pending",
+            "testStrategy": "Test all form controls respond correctly to user input and maintain controlled state through react-hook-form"
+          },
+          {
+            "id": 5,
+            "title": "Add form validation and submission handling",
+            "description": "Implement comprehensive form validation and submission logic with TypeScript type safety",
+            "dependencies": [
+              "3.4"
+            ],
+            "details": "Add validation rules for all form fields using react-hook-form validation schema. Implement form submission handler with TypeScript types that processes the configuration data. Add error handling and display validation messages using Shadcn/UI FormMessage components. Include form reset functionality and proper error state management.",
+            "status": "pending",
+            "testStrategy": "Test form validation prevents invalid submissions, displays appropriate error messages, and successfully processes valid form data with proper TypeScript typing"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Add Configuration Presets System",
+        "description": "Implement preset buttons for one-click configuration setup using Shadcn/UI components",
+        "details": "Create TypeScript interfaces for preset configurations like 'Gemini-2.5-Flash-Search' with predefined values. Add preset buttons using Shadcn/UI Button variants that automatically populate a new configuration slot when clicked. Store presets as typed constants or configuration objects with proper TypeScript definitions.",
+        "testStrategy": "Verify preset buttons add correct configurations with proper default values and TypeScript type checking prevents configuration errors",
+        "priority": "medium",
+        "dependencies": [
+          3
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create TypeScript Configuration Preset Interfaces",
+            "description": "Define TypeScript interfaces and types for configuration presets including model parameters, search settings, and metadata",
+            "dependencies": [],
+            "details": "Create a types/presets.ts file with interfaces for ModelConfiguration (model, reasoning, search, temperature, maxTokens), ConfigurationPreset (id, name, description, configuration), and PresetCategory. Define union types for model names (Gemini 2.0 Flash, Gemini 2.5 Flash, Gemini 2.5 Pro) and reasoning levels (Auto, 0, Max). Use strict TypeScript typing to ensure type safety.",
+            "status": "pending",
+            "testStrategy": "Verify TypeScript compilation passes and interfaces correctly type all preset data structures"
+          },
+          {
+            "id": 2,
+            "title": "Define Preset Configuration Constants",
+            "description": "Create predefined preset configurations with default values for popular model setups like Gemini-2.5-Flash-Search",
+            "dependencies": [
+              "4.1"
+            ],
+            "details": "Create constants/presets.ts file with typed preset objects including: Gemini-2.5-Flash-Search (Gemini 2.5 Flash, Auto reasoning, search enabled, temp 0.2, tokens 2048), Gemini-2.0-Flash-Basic (Gemini 2.0 Flash, 0 reasoning, no search, temp 0.1, tokens 1024), Gemini-2.5-Pro-Advanced (Gemini 2.5 Pro, Max reasoning, search enabled, temp 0.4, tokens 4096). Export as readonly array with proper TypeScript typing.",
+            "status": "pending",
+            "testStrategy": "Verify preset constants match TypeScript interfaces and contain sensible default values for each configuration"
+          },
+          {
+            "id": 3,
+            "title": "Create Preset Selection Component",
+            "description": "Build a React component displaying preset buttons using Shadcn/UI Button variants with icons and descriptions",
+            "dependencies": [
+              "4.2"
+            ],
+            "details": "Create components/PresetSelector.tsx using Shadcn/UI Button component with 'outline' variant. Display presets in a grid layout with each button showing preset name, model type, and key features (search enabled, reasoning level). Use lucide-react icons for visual indicators (Zap for fast models, Brain for reasoning, Search for search-enabled). Implement responsive design with proper spacing using Tailwind CSS.",
+            "status": "pending",
+            "testStrategy": "Verify buttons render correctly with proper styling, icons display appropriately, and component is responsive across screen sizes"
+          },
+          {
+            "id": 4,
+            "title": "Implement Preset Button Click Handler",
+            "description": "Add click functionality to preset buttons that populates configuration form with preset values",
+            "dependencies": [
+              "4.3"
+            ],
+            "details": "Implement handlePresetClick function that takes a ConfigurationPreset and calls parent component's onPresetSelect callback. The callback should populate a new configuration slot with preset values: model selection, reasoning dropdown, search checkbox, temperature slider, and max tokens slider. Ensure the handler validates the preset data and handles edge cases like maximum configurations reached (8 limit).",
+            "status": "pending",
+            "testStrategy": "Test preset button clicks correctly populate form fields with expected values and handle maximum configuration limit gracefully"
+          },
+          {
+            "id": 5,
+            "title": "Integrate Preset System with Configuration Page",
+            "description": "Connect the preset selector to the main configuration page and handle state management for adding preset configurations",
+            "dependencies": [
+              "4.4"
+            ],
+            "details": "Integrate PresetSelector component into the main configuration page above the configuration list. Implement state management to handle adding new configurations from presets while respecting the 8-configuration limit. Add transition animations using Tailwind CSS when new configurations are added. Ensure proper TypeScript typing for all state updates and callback functions. Handle edge cases like duplicate configurations and validation errors.",
+            "status": "pending",
+            "testStrategy": "Verify preset selection adds new configurations correctly, respects maximum limit, shows appropriate feedback to users, and maintains proper state consistency"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Create Prompt Engineering Page",
+        "description": "Build dedicated prompt input area with placeholder support for batch testing using Shadcn/UI components",
+        "details": "Create PromptsPage component using Shadcn/UI Textarea for prompt input with TypeScript types. Implement placeholder system with {{variable}} syntax detection using TypeScript string parsing. Add UI for defining placeholder key-value pairs using Shadcn/UI Table component or form interface for CSV-like input with proper TypeScript interfaces for data structures.",
+        "testStrategy": "Test prompt text area accepts input, placeholders are detected and can be configured, and TypeScript ensures type safety for placeholder data structures",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create PromptsPage component and set up file structure",
+            "description": "Create the main PromptsPage component in src/pages/PromptsPage.tsx with basic layout and TypeScript interfaces",
+            "dependencies": [],
+            "details": "Create src/pages directory and PromptsPage.tsx file. Set up basic component structure with React functional component and export. Define initial TypeScript interfaces for prompt data and placeholder variables. Import necessary dependencies from React and set up component props typing.",
+            "status": "pending",
+            "testStrategy": "Verify component renders without errors and TypeScript compilation passes"
+          },
+          {
+            "id": 2,
+            "title": "Implement Textarea component for prompt input",
+            "description": "Add Shadcn/UI Textarea component for prompt input with proper TypeScript integration",
+            "dependencies": [
+              "5.1"
+            ],
+            "details": "Install and configure Shadcn/UI Textarea component. Create controlled textarea input with TypeScript state management for prompt text. Implement onChange handlers with proper typing. Add placeholder text and styling consistent with existing Shadcn/UI components. Ensure textarea is resizable and has appropriate minimum height.",
+            "status": "pending",
+            "testStrategy": "Test textarea accepts input, state updates correctly, and styling matches Shadcn/UI design system"
+          },
+          {
+            "id": 3,
+            "title": "Build placeholder detection and parsing system",
+            "description": "Implement {{variable}} syntax detection using TypeScript string parsing and regular expressions",
+            "dependencies": [
+              "5.2"
+            ],
+            "details": "Create utility functions to parse prompt text and extract placeholder variables using regex pattern /\\{\\{([^}]+)\\}\\}/g. Implement TypeScript interfaces for placeholder data structure including variable name and value fields. Add real-time parsing that updates when prompt text changes. Create validation for placeholder syntax and duplicate detection.",
+            "status": "pending",
+            "testStrategy": "Test placeholder detection with various input patterns, verify extracted variables are correctly identified, and ensure TypeScript type safety"
+          },
+          {
+            "id": 4,
+            "title": "Create placeholder configuration UI using Shadcn/UI Table",
+            "description": "Build interface for defining placeholder key-value pairs using Shadcn/UI Table component",
+            "dependencies": [
+              "5.3"
+            ],
+            "details": "Install and implement Shadcn/UI Table component for displaying detected placeholders. Create table with columns for variable name and value input. Add Shadcn/UI Input components for value entry with proper TypeScript form handling. Implement add/remove functionality for manual placeholder management. Include validation for required placeholders and data consistency.",
+            "status": "pending",
+            "testStrategy": "Verify table displays detected placeholders, value inputs work correctly, and form validation prevents invalid states"
+          },
+          {
+            "id": 5,
+            "title": "Integrate components and implement batch testing interface",
+            "description": "Connect prompt input, placeholder detection, and configuration UI into cohesive prompt engineering interface",
+            "dependencies": [
+              "5.1",
+              "5.2",
+              "5.3",
+              "5.4"
+            ],
+            "details": "Integrate all components into PromptsPage with proper state management using React hooks and TypeScript. Implement CSV-like input interface for batch placeholder values. Add preview functionality showing resolved prompts with placeholder substitutions. Create export/import functionality for prompt templates. Ensure responsive layout and proper error handling.",
+            "status": "pending",
+            "testStrategy": "Test complete workflow from prompt input to placeholder configuration, verify batch processing works, and ensure all TypeScript interfaces are properly implemented"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Implement State Management",
+        "description": "Set up centralized state management for configurations, prompts, and experiment data with TypeScript support",
+        "details": "Use Zustand for state management with TypeScript interfaces for type safety. Create strongly-typed stores for configurations array, current prompt with placeholders, and experiment results. Define comprehensive TypeScript interfaces for all state shapes. Ensure state persists during navigation between pages and integrates well with Vite's development environment.",
+        "testStrategy": "Verify state is shared across components, persists during page navigation, and TypeScript provides compile-time type checking for all state operations",
+        "priority": "high",
+        "dependencies": [
+          2,
+          5
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Install Zustand and Set Up TypeScript Interfaces",
+            "description": "Install Zustand state management library and create comprehensive TypeScript interfaces for all state shapes",
+            "dependencies": [],
+            "details": "Install zustand via npm/yarn and create a types.ts file in src/types/ directory. Define TypeScript interfaces for ConfigurationData (model selection, parameters), PromptData (prompt text, placeholders), ExperimentData (results, status), and AppState (combines all state types). Include proper typing for Gemini model configurations, experiment results, and validation states.",
+            "status": "pending",
+            "testStrategy": "Verify TypeScript compilation passes and interfaces provide proper type checking in IDE"
+          },
+          {
+            "id": 2,
+            "title": "Create Configuration Store with Zustand",
+            "description": "Implement strongly-typed Zustand store for managing model configurations array",
+            "dependencies": [
+              "6.1"
+            ],
+            "details": "Create src/stores/configurationStore.ts using Zustand with TypeScript. Implement state for configurations array, actions for addConfiguration, updateConfiguration, deleteConfiguration, and validateConfigurations. Include persist middleware to maintain state across page refreshes. Integrate with existing TypeScript interfaces and ensure compatibility with Vite's development environment.",
+            "status": "pending",
+            "testStrategy": "Test CRUD operations on configurations, verify persistence across page reloads, and validate TypeScript type safety"
+          },
+          {
+            "id": 3,
+            "title": "Create Prompt Store with Zustand",
+            "description": "Implement strongly-typed Zustand store for managing current prompt and placeholders",
+            "dependencies": [
+              "6.1"
+            ],
+            "details": "Create src/stores/promptStore.ts using Zustand with TypeScript. Implement state for current prompt text, placeholders array, and prompt validation status. Include actions for setPrompt, addPlaceholder, removePlaceholder, and validatePrompt. Use persist middleware for state persistence and ensure proper TypeScript integration with defined interfaces.",
+            "status": "pending",
+            "testStrategy": "Test prompt text updates, placeholder management, and verify state persists during navigation between pages"
+          },
+          {
+            "id": 4,
+            "title": "Create Experiment Store with Zustand",
+            "description": "Implement strongly-typed Zustand store for managing experiment data and results",
+            "dependencies": [
+              "6.1"
+            ],
+            "details": "Create src/stores/experimentStore.ts using Zustand with TypeScript. Implement state for experiment results, loading states, error states, and execution status. Include actions for startExperiment, updateResults, setLoading, setError, and clearResults. Use TypeScript interfaces for type safety and integrate with persist middleware for result persistence.",
+            "status": "pending",
+            "testStrategy": "Test experiment lifecycle states, error handling, and verify results persist across navigation"
+          },
+          {
+            "id": 5,
+            "title": "Create Global Store Provider and Integration",
+            "description": "Create a global store provider that combines all stores and integrate with existing React components",
+            "dependencies": [
+              "6.2",
+              "6.3",
+              "6.4"
+            ],
+            "details": "Create src/stores/index.ts that exports all stores and a useStores hook for convenient access. Create a StoreProvider component if needed for context sharing. Update App.tsx to integrate with the store system and ensure all stores work together. Test store interactions and verify state sharing across components works correctly with TypeScript support.",
+            "status": "pending",
+            "testStrategy": "Verify all stores are accessible throughout component tree, state updates propagate correctly, and TypeScript provides proper intellisense and error checking"
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "title": "Build API Integration Layer",
+        "description": "Create service layer for making parallel API calls to localhost:8055 with full TypeScript support",
+        "details": "Implement API service using fetch with TypeScript types and interfaces for all requests/responses. Make POST requests to /run_single_model endpoint with proper typing. Handle parallel requests for multiple configurations using Promise.all with TypeScript generics. Implement request management with retry logic (retry up to 2 times for failed requests) using typed error handling. Define comprehensive TypeScript interfaces for request/response objects and error states.",
+        "testStrategy": "Test API calls work correctly, parallel requests execute properly, retry logic handles failures, and TypeScript prevents runtime type errors",
+        "priority": "high",
+        "dependencies": [
+          6
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Define TypeScript API interfaces and types",
+            "description": "Create comprehensive TypeScript interfaces for API request/response objects, error states, and configuration types used in the API integration layer",
+            "dependencies": [],
+            "details": "Create src/types/api.ts with interfaces for API requests to localhost:8055/run_single_model endpoint. Define ModelConfiguration interface with Gemini model types, reasoning options, search settings, temperature, and max tokens. Create APIRequest interface with configuration and prompt fields. Define APIResponse interface with result data and metadata. Include APIError interface with error codes, messages, and retry information. Create RetryOptions interface for configuring retry logic.",
+            "status": "pending",
+            "testStrategy": "Test TypeScript compilation passes without errors and interfaces provide proper type safety for API operations"
+          },
+          {
+            "id": 2,
+            "title": "Implement base API service class with fetch wrapper",
+            "description": "Create core API service class that handles HTTP requests to localhost:8055 with proper TypeScript typing and error handling",
+            "dependencies": [
+              "7.1"
+            ],
+            "details": "Create src/services/apiService.ts with BaseAPIService class. Implement typed fetch wrapper method that accepts generic types for request/response. Add proper error handling for network failures, HTTP status codes, and JSON parsing errors. Include request timeout configuration and proper TypeScript return types. Set up base URL configuration for localhost:8055 and common headers. Implement logging for debugging API calls.",
+            "status": "pending",
+            "testStrategy": "Test base service makes successful requests, handles errors properly, and maintains type safety throughout the request lifecycle"
+          },
+          {
+            "id": 3,
+            "title": "Add retry logic with exponential backoff",
+            "description": "Implement robust retry mechanism that attempts failed requests up to 2 times with proper TypeScript error handling",
+            "dependencies": [
+              "7.2"
+            ],
+            "details": "Extend BaseAPIService with retry functionality using exponential backoff strategy. Implement retryRequest method that accepts retry options and uses TypeScript generics. Add configurable delay between retries (starting at 1000ms, doubling each attempt). Include proper error aggregation that maintains original error types. Add retry counter and logging for debugging. Ensure retry logic respects TypeScript error interfaces and provides proper error context.",
+            "status": "pending",
+            "testStrategy": "Test retry logic triggers on network failures, respects maximum retry count, and maintains proper error typing throughout retry attempts"
+          },
+          {
+            "id": 4,
+            "title": "Implement parallel API request manager",
+            "description": "Create service methods for executing multiple API requests concurrently using Promise.all with full TypeScript generics support",
+            "dependencies": [
+              "7.3"
+            ],
+            "details": "Add runParallelRequests method to APIService that accepts array of ModelConfiguration objects and returns Promise<APIResponse[]>. Use Promise.all with proper TypeScript generics to maintain type safety. Implement Promise.allSettled fallback for partial failure scenarios. Add request batching logic that can handle 1-8 concurrent requests. Include proper error handling that distinguishes between individual request failures and batch failures. Ensure all responses maintain proper TypeScript typing.",
+            "status": "pending",
+            "testStrategy": "Test parallel requests execute simultaneously, handle partial failures gracefully, and maintain TypeScript type safety for all response objects"
+          },
+          {
+            "id": 5,
+            "title": "Create main API integration service with run_single_model endpoint",
+            "description": "Implement the primary service interface for making POST requests to /run_single_model endpoint with complete TypeScript integration",
+            "dependencies": [
+              "7.4"
+            ],
+            "details": "Create ModelAPIService class that extends the base service functionality. Implement runSingleModel method that accepts ModelConfiguration and prompt, makes POST to /run_single_model endpoint. Add runMultipleModels method that leverages parallel request manager for multiple configurations. Include proper request body formatting with TypeScript validation. Add response parsing and validation using defined TypeScript interfaces. Export main service instance for use throughout the application.",
+            "status": "pending",
+            "testStrategy": "Test single model requests work correctly, multiple model requests execute in parallel, all responses are properly typed, and error scenarios are handled appropriately"
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Create Results Comparison Page",
+        "description": "Build side-by-side tabular view for experiment results with streaming support using Shadcn/UI components",
+        "details": "Create ResultsPage component using Shadcn/UI Table component with TypeScript interfaces for result data. Implement responsive table/grid layout with proper TypeScript types. Each configuration gets its own column displaying generated text, token usage, cost, and latency with strongly-typed data structures. Implement streaming results display using Shadcn/UI loading components for in-progress requests. Handle individual error states per column with TypeScript error type definitions.",
+        "testStrategy": "Verify results display correctly in Shadcn/UI table columns, loading states work properly, errors are handled per configuration, and TypeScript ensures data integrity",
+        "priority": "high",
+        "dependencies": [
+          7
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create ResultsPage component base structure",
+            "description": "Create the main ResultsPage component file with TypeScript interfaces and basic component structure",
+            "dependencies": [],
+            "details": "Create src/pages/ResultsPage.tsx with TypeScript interfaces for ExperimentResult, ConfigurationResult, and StreamingState types. Define interfaces for generated text, token usage, cost, and latency data. Set up basic functional component structure with proper TypeScript typing following existing project patterns observed in src/components/ui/button.tsx.",
+            "status": "pending",
+            "testStrategy": "Verify component renders without errors and TypeScript compilation passes"
+          },
+          {
+            "id": 2,
+            "title": "Install and configure Shadcn/UI Table component",
+            "description": "Install the Shadcn/UI Table component and create reusable table structure for results display",
+            "dependencies": [
+              "8.1"
+            ],
+            "details": "Run npx shadcn@latest add table to install Table, TableBody, TableCell, TableHead, TableHeader, TableRow components. Create src/components/ui/table.tsx following the Shadcn/UI pattern similar to existing button.tsx. Configure table with responsive design using Tailwind CSS classes that match the project's existing styling patterns.",
+            "status": "pending",
+            "testStrategy": "Test that table component renders correctly and is responsive across different screen sizes"
+          },
+          {
+            "id": 3,
+            "title": "Implement side-by-side column layout for configurations",
+            "description": "Build the responsive table layout where each configuration gets its own column displaying results",
+            "dependencies": [
+              "8.2"
+            ],
+            "details": "Implement table structure with dynamic columns based on configuration count (1-8 configurations as specified in Task 2). Each column shows configuration name in header and result data in cells. Use CSS Grid or Flexbox for responsive behavior with horizontal scrolling for many configurations. Apply proper TypeScript types for configuration props and column data structures.",
+            "status": "pending",
+            "testStrategy": "Test with different numbers of configurations (1-8) and verify responsive behavior on mobile and desktop"
+          },
+          {
+            "id": 4,
+            "title": "Add streaming support with loading states",
+            "description": "Implement streaming results display using Shadcn/UI loading components for in-progress requests",
+            "dependencies": [
+              "8.3"
+            ],
+            "details": "Install and configure npx shadcn@latest add skeleton for loading components. Create streaming state management with TypeScript types for pending, loading, complete, and error states. Implement skeleton loaders for each result cell during streaming. Add real-time updates capability for displaying partial results as they stream in. Use React state management for tracking streaming status per configuration column.",
+            "status": "pending",
+            "testStrategy": "Test loading states display correctly, streaming updates work in real-time, and skeleton animations are smooth"
+          },
+          {
+            "id": 5,
+            "title": "Implement error handling and result data display",
+            "description": "Add individual error states per column and display complete result data including generated text, token usage, cost, and latency",
+            "dependencies": [
+              "8.4"
+            ],
+            "details": "Create TypeScript error type definitions for different error scenarios (API errors, timeout, validation). Implement error boundary components for individual columns so one failing configuration doesn't break others. Display complete result data with proper formatting for text (with text wrapping), numerical values for tokens/cost/latency with appropriate units. Add error retry mechanisms and clear error messaging using existing project's styling patterns with Tailwind CSS.",
+            "status": "pending",
+            "testStrategy": "Test error states display correctly per column, retry functionality works, and all result data types render with proper formatting"
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "title": "Implement Experiment Execution",
+        "description": "Connect Run Experiment button to trigger parallel API calls and navigate to results using TypeScript",
+        "details": "Add Run Experiment button using Shadcn/UI Button component to appropriate page (likely Prompts page). Implement experiment execution logic with TypeScript types that processes prompt with placeholders, makes parallel API calls for each configuration, and navigates to results page using React Router with TypeScript navigation. Handle loading states and error conditions with proper TypeScript error handling and type guards.",
+        "testStrategy": "Test complete experiment flow from configuration to results display works correctly and TypeScript provides compile-time safety for all operations",
+        "priority": "high",
+        "dependencies": [
+          8
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Add React Router for navigation infrastructure",
+            "description": "Install and configure React Router to enable navigation between pages including prompts and results pages",
+            "dependencies": [],
+            "details": "Install react-router-dom and @types/react-router-dom dependencies. Configure BrowserRouter in main.tsx wrapping the App component. Set up initial route structure in App.tsx with routes for prompts page (/) and results page (/results). Create TypeScript interfaces for route parameters and navigation state.",
+            "status": "pending",
+            "testStrategy": "Verify routing works by navigating between pages and testing browser back/forward buttons"
+          },
+          {
+            "id": 2,
+            "title": "Create experiment execution types and interfaces",
+            "description": "Define TypeScript interfaces for experiment configuration, API responses, and execution state management",
+            "dependencies": [],
+            "details": "Create types file (src/types/experiment.ts) with interfaces for ExperimentConfig (model, temperature, maxTokens, etc.), ExperimentResult (response, timestamp, metadata), ExperimentExecution (status, progress, errors), and ApiResponse. Include union types for execution status ('idle' | 'running' | 'completed' | 'error') and proper error type definitions.",
+            "status": "pending",
+            "testStrategy": "Compile TypeScript successfully and verify type checking works for all experiment-related operations"
+          },
+          {
+            "id": 3,
+            "title": "Implement Run Experiment button component",
+            "description": "Add Run Experiment button using Shadcn/UI Button component with proper TypeScript event handling and loading states",
+            "dependencies": [
+              "9.1"
+            ],
+            "details": "Create RunExperimentButton component in src/components/RunExperimentButton.tsx using the existing Button component from ui/button.tsx. Add TypeScript props interface including onClick handler, loading state, disabled state. Implement loading spinner using lucide-react icons. Handle click events with proper TypeScript event typing and prevent double-clicks during execution.",
+            "status": "pending",
+            "testStrategy": "Test button click handling, loading states, and disabled states work correctly with TypeScript type safety"
+          },
+          {
+            "id": 4,
+            "title": "Create parallel API execution service",
+            "description": "Implement service for making concurrent API calls to Gemini models with TypeScript async/await patterns",
+            "dependencies": [
+              "9.2"
+            ],
+            "details": "Create src/services/experimentService.ts with functions for parallel API execution. Implement executeExperiment() function that takes configurations array and prompt, uses Promise.allSettled() for concurrent calls, handles different Gemini model endpoints (2.0 Flash, 2.5 Flash, 2.5 Pro). Include proper TypeScript error handling, timeout logic, and response type validation. Add retry logic for failed requests.",
+            "status": "pending",
+            "testStrategy": "Mock API responses and test parallel execution, error handling, and timeout scenarios"
+          },
+          {
+            "id": 5,
+            "title": "Integrate execution flow with navigation",
+            "description": "Connect Run Experiment button to trigger API calls and navigate to results page with TypeScript state management",
+            "dependencies": [
+              "9.3",
+              "9.4"
+            ],
+            "details": "Implement handleRunExperiment function that validates configurations, shows loading state, calls experimentService.executeExperiment(), handles success/error cases, and navigates to results page using React Router's useNavigate hook with TypeScript. Pass experiment results through navigation state or URL parameters. Include proper TypeScript error boundaries and user feedback for failed experiments.",
+            "status": "pending",
+            "testStrategy": "Test complete flow from button click through API execution to results page navigation, including error cases and loading states"
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Add Responsive Design and Mobile Support",
+        "description": "Ensure application works well on different screen sizes using Tailwind CSS and Shadcn/UI responsive components",
+        "details": "Implement responsive design using Tailwind CSS classes and Shadcn/UI responsive components. Ensure configuration forms built with Shadcn/UI, results table, and navigation work on mobile devices. Use responsive grid layouts and appropriate Tailwind breakpoints. Leverage Shadcn/UI's built-in responsive design patterns and TypeScript for component prop validation.",
+        "testStrategy": "Test application on various screen sizes, verify usability on mobile devices, and ensure Shadcn/UI components respond properly to different viewports",
+        "priority": "medium",
+        "dependencies": [
+          8
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement responsive navigation header with mobile hamburger menu",
+            "description": "Create a responsive navigation component using Shadcn/UI that collapses to a hamburger menu on mobile devices",
+            "dependencies": [],
+            "details": "Create a Navigation component using Shadcn/UI Sheet component for mobile drawer and Button component for hamburger toggle. Use Tailwind breakpoints (sm:, md:, lg:) to show/hide navigation elements. Implement responsive navigation links for Configuration, Prompts, and Results pages. Use lucide-react icons for hamburger menu (Menu, X icons). Apply responsive text sizing and spacing with Tailwind classes like 'text-sm sm:text-base' and 'px-4 sm:px-6'.",
+            "status": "pending",
+            "testStrategy": "Test navigation on different screen sizes (320px mobile, 768px tablet, 1024px desktop), verify hamburger menu functionality on mobile, and ensure all navigation links are accessible and properly sized"
+          },
+          {
+            "id": 2,
+            "title": "Make configuration forms responsive with adaptive grid layouts",
+            "description": "Update configuration forms to use responsive Tailwind grid classes and Shadcn/UI form components that adapt to different screen sizes",
+            "dependencies": [
+              "10.1"
+            ],
+            "details": "Modify configuration forms to use responsive grid layouts with Tailwind classes like 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'. Ensure Shadcn/UI form components (Input, Select, Button) scale properly on mobile using responsive padding and font sizes. Implement responsive spacing between form elements using Tailwind spacing utilities like 'space-y-4 md:space-y-6'. Use responsive button sizes from Shadcn/UI button variants ('size-sm' on mobile, 'size-default' on desktop).",
+            "status": "pending",
+            "testStrategy": "Verify forms are usable on mobile devices, test form submission on different screen sizes, and ensure all form elements are properly touchable on mobile"
+          },
+          {
+            "id": 3,
+            "title": "Create responsive results table with horizontal scroll and mobile optimization",
+            "description": "Implement a responsive table component for experiment results that handles overflow gracefully on mobile devices",
+            "dependencies": [
+              "10.1"
+            ],
+            "details": "Create a responsive Table component using Shadcn/UI table components with horizontal scroll on mobile using 'overflow-x-auto'. Implement responsive table cells with Tailwind classes like 'px-2 sm:px-4 py-1 sm:py-2'. Add responsive text sizing for table content using 'text-xs sm:text-sm'. Provide mobile-friendly table alternatives like card layouts for very small screens using Tailwind display utilities 'hidden sm:table' and 'sm:hidden'.",
+            "status": "pending",
+            "testStrategy": "Test table scrolling on mobile devices, verify table readability on different screen sizes, and ensure table data remains accessible"
+          },
+          {
+            "id": 4,
+            "title": "Implement responsive layout containers and spacing",
+            "description": "Create consistent responsive layout containers and spacing throughout the application using Tailwind CSS",
+            "dependencies": [
+              "10.1"
+            ],
+            "details": "Create responsive container components using Tailwind max-width utilities like 'max-w-xs sm:max-w-sm md:max-w-2xl lg:max-w-4xl xl:max-w-6xl'. Implement responsive padding and margins using Tailwind classes like 'p-4 sm:p-6 lg:p-8'. Create consistent responsive spacing between sections using 'space-y-6 sm:space-y-8 lg:space-y-12'. Ensure proper responsive typography scaling with Tailwind text utilities 'text-sm sm:text-base lg:text-lg'.",
+            "status": "pending",
+            "testStrategy": "Verify consistent spacing and layout across all pages on different screen sizes, test content readability and accessibility"
+          },
+          {
+            "id": 5,
+            "title": "Add responsive utility components and viewport optimizations",
+            "description": "Create responsive utility components and implement viewport meta tags for proper mobile rendering",
+            "dependencies": [
+              "10.1",
+              "10.2",
+              "10.3",
+              "10.4"
+            ],
+            "details": "Add viewport meta tag with 'width=device-width, initial-scale=1' for proper mobile rendering. Create responsive utility components like responsive Shadcn/UI Card components with mobile-friendly padding and borders. Implement responsive image handling if needed using Tailwind responsive image classes. Add responsive touch targets ensuring minimum 44px touch areas on mobile using Tailwind sizing utilities. Create responsive loading states and error messages using Shadcn/UI Alert components with appropriate mobile styling.",
+            "status": "pending",
+            "testStrategy": "Test application across various devices and screen sizes, verify touch interactions work properly on mobile, and ensure proper viewport scaling and zoom behavior"
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "title": "Implement Configuration Validation",
+        "description": "Add validation to ensure at least one configuration exists before running experiments using TypeScript validation",
+        "status": "pending",
+        "dependencies": [
+          6
+        ],
+        "priority": "medium",
+        "details": "Implement TypeScript validation logic using type guards and schema validation (Zod) to ensure at least one configuration exists before allowing experiment execution. Create specific validation functions that check configuration array length and validate individual configuration parameters. Use Shadcn/UI form validation patterns with react-hook-form for real-time validation feedback. Implement validation state management that disables the Run Experiment button when no configurations exist or when configurations are invalid. Show clear error messages using Shadcn/UI Alert components with appropriate severity levels (warning for missing configurations, error for invalid data). Use TypeScript interfaces to ensure compile-time validation of configuration shapes and validation function signatures.",
+        "testStrategy": "Test that validation prevents experiment execution when no configurations exist, shows appropriate Shadcn/UI Alert messages for different validation states, disables Run button correctly, validates individual configuration parameters, and TypeScript catches all validation logic errors at compile time",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create TypeScript validation schemas",
+            "description": "Define Zod schemas and TypeScript interfaces for configuration validation",
+            "status": "pending",
+            "dependencies": [],
+            "details": "Create comprehensive Zod schemas in src/types/config-schema.ts for validating configuration objects. Define temperature validation using z.number().min(0).max(2), max tokens validation using z.number().int().min(100).max(8192), model selection using z.enum() for Gemini variants (2.0 Flash, 2.5 Flash, 2.5 Pro), reasoning parameters using z.union() for Auto/0/Max values, and search boolean validation using z.boolean(). Implement TypeScript type guards using schema.safeParse() for runtime validation. Create validateConfiguration() function returning typed validation results and export TypeScript types using z.infer<typeof schema> for compile-time safety.",
+            "testStrategy": "Unit tests for each Zod schema component with valid/invalid inputs, type guard tests ensuring proper TypeScript narrowing behavior, edge case testing for boundary values (temperature 0/2, tokens 100/8192), and TypeScript compilation tests to verify type safety at build time"
+          },
+          {
+            "id": 2,
+            "title": "Implement configuration existence validation",
+            "description": "Add validation logic to check if at least one configuration exists",
+            "status": "pending",
+            "dependencies": [],
+            "details": "Create validation function that checks configurations array length and returns typed validation result. Integrate with state management to trigger validation on configuration changes.",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Add Shadcn/UI validation feedback components",
+            "description": "Implement Alert components to display validation errors and warnings",
+            "status": "pending",
+            "dependencies": [],
+            "details": "Use Shadcn/UI Alert component with warning variant for missing configurations and error variant for invalid data. Position alerts appropriately in the UI near the Run Experiment button.",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Implement Run button state management",
+            "description": "Control Run Experiment button disabled state based on validation results",
+            "status": "pending",
+            "dependencies": [],
+            "details": "Connect validation state to Run button disabled prop. Use TypeScript to ensure proper typing of validation state and button props. Provide visual feedback when button is disabled.",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Add form-level validation integration",
+            "description": "Integrate validation with react-hook-form for real-time feedback",
+            "status": "pending",
+            "dependencies": [],
+            "details": "Use react-hook-form validation rules with Zod resolver for configuration forms. Provide immediate validation feedback as users modify configurations using Shadcn/UI form error states.",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "title": "Add Loading States and Progress Indicators",
+        "description": "Implement comprehensive loading states throughout the application using Shadcn/UI loading components",
+        "details": "Add loading spinners using Shadcn/UI Spinner component and progress indicators for API calls with TypeScript interfaces for loading states. Implement skeleton loading for results table using Shadcn/UI Skeleton component. Add progress tracking for batch experiments with multiple placeholder values using TypeScript to track completion states. Integrate with Vite's development environment for optimal loading performance.",
+        "testStrategy": "Verify Shadcn/UI loading states provide good user feedback during operations and TypeScript ensures proper loading state management",
+        "priority": "medium",
+        "dependencies": [
+          9
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Core Loading State TypeScript Interfaces",
+            "description": "Define comprehensive TypeScript interfaces for loading states across the application",
+            "dependencies": [],
+            "details": "Create src/types/loading.ts file with interfaces for LoadingState, ApiRequestState, BatchExperimentProgress, and SkeletonTableState. Include union types for different loading phases (idle, loading, success, error). Define generic interfaces that can be reused across components for type safety.",
+            "status": "pending",
+            "testStrategy": "Verify TypeScript compilation passes and interfaces provide proper type checking for loading state management"
+          },
+          {
+            "id": 2,
+            "title": "Install and Configure Shadcn/UI Loading Components",
+            "description": "Add Shadcn/UI Spinner and Skeleton components to the project",
+            "dependencies": [
+              "12.1"
+            ],
+            "details": "Use shadcn-ui CLI to install Spinner and Skeleton components: 'npx shadcn@latest add spinner skeleton'. Create src/components/ui/spinner.tsx and src/components/ui/skeleton.tsx. Configure with appropriate TypeScript props and Tailwind CSS styling consistent with existing button component patterns.",
+            "status": "pending",
+            "testStrategy": "Test that components render correctly and integrate with existing Shadcn/UI setup in components.json"
+          },
+          {
+            "id": 3,
+            "title": "Implement API Loading States with Progress Indicators",
+            "description": "Create reusable loading components for API calls with progress tracking",
+            "dependencies": [
+              "12.1",
+              "12.2"
+            ],
+            "details": "Create src/components/loading/ApiLoadingSpinner.tsx and src/components/loading/ProgressIndicator.tsx components. Implement spinner overlay for API calls and progress bars for batch operations. Use TypeScript interfaces from subtask 1 and integrate with Shadcn/UI components. Include percentage display and estimated time remaining for batch experiments.",
+            "status": "pending",
+            "testStrategy": "Test loading states appear during simulated API calls and progress accurately reflects completion percentage"
+          },
+          {
+            "id": 4,
+            "title": "Create Skeleton Loading for Results Table",
+            "description": "Implement skeleton loading placeholder for experiment results table",
+            "dependencies": [
+              "12.2",
+              "12.3"
+            ],
+            "details": "Create src/components/loading/TableSkeleton.tsx component using Shadcn/UI Skeleton. Design skeleton that matches expected table structure with placeholder rows, columns, and headers. Make configurable for different row counts and column structures. Use TypeScript to define props for customization (rows, columns, showHeaders).",
+            "status": "pending",
+            "testStrategy": "Verify skeleton matches actual table layout and provides smooth transition to real data"
+          },
+          {
+            "id": 5,
+            "title": "Integrate Loading States with Application Components",
+            "description": "Connect loading components to main application pages and experiment workflow",
+            "dependencies": [
+              "12.3",
+              "12.4"
+            ],
+            "details": "Update existing components to use new loading states. Add loading indicators to experiment execution flow, configuration forms, and results display. Implement loading state management in components that will handle API calls. Ensure proper TypeScript integration and follow existing component patterns in the codebase. Test with Vite's development environment for optimal performance.",
+            "status": "pending",
+            "testStrategy": "Test complete user journey with loading states from experiment configuration through results display, ensuring smooth UX transitions"
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "title": "Implement Error Handling and User Feedback",
+        "description": "Add comprehensive error handling with user-friendly error messages using Shadcn/UI feedback components",
+        "details": "Implement React error boundaries with TypeScript for component error handling. Add error handling for API failures using TypeScript error types. Use Shadcn/UI Toast component for notifications and Alert components for error displays. Handle network errors, API errors, and validation errors gracefully with proper TypeScript error type definitions and user feedback through Shadcn/UI components.",
+        "testStrategy": "Test error scenarios and verify appropriate user feedback is provided through Shadcn/UI components, with TypeScript ensuring proper error type handling",
+        "priority": "medium",
+        "dependencies": [
+          9
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create TypeScript Error Type Definitions",
+            "description": "Define comprehensive TypeScript interfaces and type definitions for all error types including API errors, network errors, and validation errors",
+            "dependencies": [],
+            "details": "Create a types/errors.ts file with interfaces for ApiError, NetworkError, ValidationError, and other error types. Include error codes, messages, and optional details. Define union types for different error categories and ensure all error objects are properly typed with TypeScript interfaces.",
+            "status": "pending",
+            "testStrategy": "Verify TypeScript compilation with proper error type checking and ensure error types cover all expected error scenarios"
+          },
+          {
+            "id": 2,
+            "title": "Implement React Error Boundary Components",
+            "description": "Create React error boundary components with TypeScript support to catch and handle component errors gracefully",
+            "dependencies": [
+              "13.1"
+            ],
+            "details": "Create ErrorBoundary.tsx component using React's error boundary pattern with componentDidCatch and getDerivedStateFromError. Include fallback UI using Shadcn/UI Alert component. Add TypeScript interfaces for error boundary props and state. Create different error boundary variants for different parts of the application.",
+            "status": "pending",
+            "testStrategy": "Test error boundary catches errors, displays fallback UI with Shadcn/UI components, and maintains TypeScript type safety"
+          },
+          {
+            "id": 3,
+            "title": "Add Shadcn/UI Toast Component for Notifications",
+            "description": "Install and configure Shadcn/UI Toast component for displaying success, error, and info notifications with TypeScript integration",
+            "dependencies": [
+              "13.1"
+            ],
+            "details": "Install Shadcn/UI Toast component using npx shadcn@latest add toast. Create a toast service with TypeScript interfaces for different toast types (success, error, warning, info). Set up toast provider in main application component and create utility functions for showing error toasts with proper TypeScript typing.",
+            "status": "pending",
+            "testStrategy": "Verify toast component displays correctly, supports different variants, and TypeScript provides proper type checking for toast functions"
+          },
+          {
+            "id": 4,
+            "title": "Implement API Error Handling with TypeScript",
+            "description": "Create centralized API error handling system with TypeScript error types and user feedback through Shadcn/UI components",
+            "dependencies": [
+              "13.1",
+              "13.3"
+            ],
+            "details": "Create API error handling utilities with TypeScript type guards for different error response types. Implement error interceptors for network requests that automatically show toast notifications for errors. Handle different HTTP status codes (400, 401, 403, 404, 500) with appropriate user messages using Shadcn/UI Toast component. Include retry logic for network failures.",
+            "status": "pending",
+            "testStrategy": "Test API error handling catches different error types, displays appropriate toast messages, and TypeScript ensures proper error type handling"
+          },
+          {
+            "id": 5,
+            "title": "Add Form Validation Error Handling",
+            "description": "Implement validation error handling for forms using Shadcn/UI Alert components and TypeScript validation schemas",
+            "dependencies": [
+              "13.1",
+              "13.2"
+            ],
+            "details": "Create form validation error handling that integrates with existing form components. Use Shadcn/UI Alert component to display validation errors inline with forms. Implement TypeScript schemas for form validation with detailed error messages. Add error state management that works with the existing state management system and displays errors clearly to users.",
+            "status": "pending",
+            "testStrategy": "Verify validation errors display properly using Shadcn/UI Alert components, form submission is blocked for invalid data, and TypeScript provides compile-time validation of error handling logic"
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "title": "Add Basic Experiment History",
+        "description": "Implement simple local storage of recent experiments for user convenience with TypeScript data structures",
+        "details": "Store recent experiments in localStorage with TypeScript interfaces for data serialization. Save configurations and results with proper type definitions. Add simple UI using Shadcn/UI components to view and reload previous experiments. Limit storage to prevent excessive browser storage usage with TypeScript-enforced data validation and cleanup logic.",
+        "testStrategy": "Verify experiments are saved locally with proper TypeScript type safety, can be retrieved correctly, and Shadcn/UI components display history appropriately",
+        "priority": "low",
+        "dependencies": [
+          12
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create TypeScript interfaces for experiment history data",
+            "description": "Define comprehensive TypeScript interfaces for experiment history data structures including configurations, results, and metadata",
+            "dependencies": [],
+            "details": "Create a new file src/types/experiment-history.ts with interfaces for ExperimentHistoryItem, ExperimentConfiguration, ExperimentResult, and HistoryMetadata. Include fields for experiment ID, timestamp, model configurations, prompt data, API results, and storage metadata. Use strict typing with proper optional fields and validation constraints.",
+            "status": "pending",
+            "testStrategy": "Verify TypeScript compilation and interface usage with mock data objects"
+          },
+          {
+            "id": 2,
+            "title": "Implement local storage service with TypeScript validation",
+            "description": "Create a service class for managing experiment history in localStorage with TypeScript type safety and data validation",
+            "dependencies": [
+              "14.1"
+            ],
+            "details": "Create src/services/experiment-history-service.ts with ExperimentHistoryService class. Implement methods for saveExperiment, getHistory, clearHistory, and removeExperiment with proper error handling. Add validation using TypeScript type guards and implement storage size limits (max 20 experiments) with automatic cleanup of oldest entries. Use JSON serialization with type validation.",
+            "status": "pending",
+            "testStrategy": "Test localStorage operations, data persistence across browser sessions, and storage limit enforcement"
+          },
+          {
+            "id": 3,
+            "title": "Create Shadcn/UI history components",
+            "description": "Build reusable UI components for displaying and managing experiment history using Shadcn/UI components",
+            "dependencies": [
+              "14.1"
+            ],
+            "details": "Create src/components/experiment-history/ directory with HistoryList.tsx, HistoryItem.tsx, and HistoryModal.tsx components. Use Shadcn/UI Card, Button, Dialog, and ScrollArea components. Implement props interfaces with TypeScript for component data and event handlers. Include actions for viewing details, reloading configurations, and deleting entries.",
+            "status": "pending",
+            "testStrategy": "Test component rendering, prop validation, and interaction behaviors with mock history data"
+          },
+          {
+            "id": 4,
+            "title": "Add history panel to main application layout",
+            "description": "Integrate experiment history components into the main application UI with navigation and state management",
+            "dependencies": [
+              "14.2",
+              "14.3"
+            ],
+            "details": "Modify src/App.tsx to include history panel as a collapsible sidebar or modal trigger. Add history button to main navigation using Shadcn/UI Button with history icon from lucide-react. Implement React state management for history visibility and data. Connect to ExperimentHistoryService for data fetching and updates.",
+            "status": "pending",
+            "testStrategy": "Test history panel visibility, navigation flow, and integration with main application state"
+          },
+          {
+            "id": 5,
+            "title": "Implement experiment workflow integration",
+            "description": "Connect experiment execution to automatically save to history and enable loading previous configurations",
+            "dependencies": [
+              "14.2",
+              "14.4"
+            ],
+            "details": "Integrate history saving into existing experiment execution workflow. Add hooks to save experiment data when experiments are run and results are received. Implement configuration loading from history that populates form fields with previous experiment settings. Add confirmation dialogs using Shadcn/UI AlertDialog for destructive actions like clearing history.",
+            "status": "pending",
+            "testStrategy": "Test end-to-end workflow from running experiments to saving history, loading previous configurations, and verifying data consistency"
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "title": "Optimize Performance and Bundle Size",
+        "description": "Implement performance optimizations and ensure fast loading times using Vite optimization features",
+        "details": "Implement code splitting for pages using React.lazy with TypeScript dynamic imports. Optimize bundle size by analyzing dependencies using Vite's bundle analyzer. Add performance monitoring for API calls and rendering with TypeScript performance interfaces. Implement React.memo and useMemo optimizations where appropriate with proper TypeScript typing. Leverage Vite's build optimizations and tree shaking capabilities.",
+        "testStrategy": "Verify application loads quickly using Vite's optimized builds, performs well with multiple configurations, and TypeScript compilation is optimized for production",
+        "priority": "low",
+        "dependencies": [
+          14
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Code Splitting with React.lazy",
+            "description": "Set up code splitting for pages using React.lazy with TypeScript dynamic imports to reduce initial bundle size",
+            "dependencies": [],
+            "details": "Create lazy-loaded components using React.lazy() and dynamic imports. Add React.Suspense boundaries with loading fallbacks. Implement TypeScript interfaces for lazy components. Set up route-based code splitting in main routing logic. Configure proper error boundaries for failed lazy loads. Use Vite's dynamic import() syntax to enable automatic code splitting.",
+            "status": "pending",
+            "testStrategy": "Verify that separate chunks are created for each lazy component, initial bundle size is reduced, and pages load correctly with fallback states"
+          },
+          {
+            "id": 2,
+            "title": "Configure Vite Bundle Analyzer and Optimization",
+            "description": "Set up Vite bundle analyzer to analyze dependencies and configure build optimizations for tree shaking",
+            "dependencies": [],
+            "details": "Install rollup-plugin-visualizer for bundle analysis. Configure Vite build settings for optimal tree shaking by setting build.rollupOptions.treeshake to true. Add build.sourcemap for production debugging. Configure build.minify with terser options for better compression. Set up build.chunkSizeWarningLimit and implement manual chunk splitting strategy for vendor libraries. Create npm script for bundle analysis.",
+            "status": "pending",
+            "testStrategy": "Verify bundle analyzer generates reports showing chunk sizes, tree shaking eliminates unused code, and build output shows optimized bundle sizes"
+          },
+          {
+            "id": 3,
+            "title": "Implement Performance Monitoring Infrastructure",
+            "description": "Add performance monitoring for API calls and rendering with TypeScript performance interfaces",
+            "dependencies": [],
+            "details": "Create TypeScript interfaces for performance metrics (PerformanceMetrics, APICallMetrics, RenderMetrics). Implement performance monitoring utilities using Performance API and User Timing API. Add performance measurement hooks for component rendering times. Create API call performance tracking with request/response timing. Implement memory usage monitoring. Set up performance data collection and reporting infrastructure with proper TypeScript typing.",
+            "status": "pending",
+            "testStrategy": "Verify performance metrics are collected accurately, TypeScript interfaces provide compile-time safety, and monitoring doesn't impact app performance significantly"
+          },
+          {
+            "id": 4,
+            "title": "Apply React Optimization Patterns",
+            "description": "Implement React.memo, useMemo, and useCallback optimizations with proper TypeScript typing throughout the application",
+            "dependencies": [
+              "15.1",
+              "15.3"
+            ],
+            "details": "Identify components that would benefit from React.memo optimization and wrap them with proper TypeScript component types. Add useMemo for expensive calculations and complex object creations with TypeScript return type inference. Implement useCallback for event handlers and callback props with proper TypeScript function signatures. Add performance profiling to identify re-render issues. Create TypeScript utility types for memoized components and callbacks. Document optimization patterns and performance impact.",
+            "status": "pending",
+            "testStrategy": "Use React DevTools Profiler to verify reduced re-renders, confirm TypeScript types are preserved through optimizations, and measure performance improvements"
+          },
+          {
+            "id": 5,
+            "title": "Optimize Build Configuration and Production Setup",
+            "description": "Leverage Vite's build optimizations including production settings, asset optimization, and TypeScript compilation",
+            "dependencies": [
+              "15.2",
+              "15.4"
+            ],
+            "details": "Configure production build settings in vite.config.ts with optimized build.target for modern browsers. Set up asset optimization including image compression and font loading strategies. Configure TypeScript compilation for production with optimal target and module settings. Implement preloading strategies for critical resources. Set up build.rollupOptions.output for optimal chunk naming and caching. Configure build.assetsDir and build.outDir for optimal deployment structure. Add build analysis scripts and performance budgets.",
+            "status": "pending",
+            "testStrategy": "Verify production builds are optimized for size and speed, TypeScript compilation is efficient, assets are properly compressed, and loading performance meets targets"
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "created": "2025-08-13T19:23:25.155Z",
+      "updated": "2025-08-15T06:08:17.078Z",
+      "description": "Tasks for master context"
+    }
+  }
+}

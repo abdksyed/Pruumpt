@@ -1,0 +1,43 @@
+# Task ID: 9
+# Title: Implement Experiment Execution
+# Status: pending
+# Dependencies: 8
+# Priority: high
+# Description: Connect Run Experiment button to trigger parallel API calls and navigate to results using TypeScript
+# Details:
+Add Run Experiment button using Shadcn/UI Button component to appropriate page (likely Prompts page). Implement experiment execution logic with TypeScript types that processes prompt with placeholders, makes parallel API calls for each configuration, and navigates to results page using React Router with TypeScript navigation. Handle loading states and error conditions with proper TypeScript error handling and type guards.
+
+# Test Strategy:
+Test complete experiment flow from configuration to results display works correctly and TypeScript provides compile-time safety for all operations
+
+# Subtasks:
+## 1. Add React Router for navigation infrastructure [pending]
+### Dependencies: None
+### Description: Install and configure React Router to enable navigation between pages including prompts and results pages
+### Details:
+Install react-router-dom and @types/react-router-dom dependencies. Configure BrowserRouter in main.tsx wrapping the App component. Set up initial route structure in App.tsx with routes for prompts page (/) and results page (/results). Create TypeScript interfaces for route parameters and navigation state.
+
+## 2. Create experiment execution types and interfaces [pending]
+### Dependencies: None
+### Description: Define TypeScript interfaces for experiment configuration, API responses, and execution state management
+### Details:
+Create types file (src/types/experiment.ts) with interfaces for ExperimentConfig (model, temperature, maxTokens, etc.), ExperimentResult (response, timestamp, metadata), ExperimentExecution (status, progress, errors), and ApiResponse. Include union types for execution status ('idle' | 'running' | 'completed' | 'error') and proper error type definitions.
+
+## 3. Implement Run Experiment button component [pending]
+### Dependencies: 9.1
+### Description: Add Run Experiment button using Shadcn/UI Button component with proper TypeScript event handling and loading states
+### Details:
+Create RunExperimentButton component in src/components/RunExperimentButton.tsx using the existing Button component from ui/button.tsx. Add TypeScript props interface including onClick handler, loading state, disabled state. Implement loading spinner using lucide-react icons. Handle click events with proper TypeScript event typing and prevent double-clicks during execution.
+
+## 4. Create parallel API execution service [pending]
+### Dependencies: 9.2
+### Description: Implement service for making concurrent API calls to Gemini models with TypeScript async/await patterns
+### Details:
+Create src/services/experimentService.ts with functions for parallel API execution. Implement executeExperiment() function that takes configurations array and prompt, uses Promise.allSettled() for concurrent calls, handles different Gemini model endpoints (2.0 Flash, 2.5 Flash, 2.5 Pro). Include proper TypeScript error handling, timeout logic, and response type validation. Add retry logic for failed requests.
+
+## 5. Integrate execution flow with navigation [pending]
+### Dependencies: 9.3, 9.4
+### Description: Connect Run Experiment button to trigger API calls and navigate to results page with TypeScript state management
+### Details:
+Implement handleRunExperiment function that validates configurations, shows loading state, calls experimentService.executeExperiment(), handles success/error cases, and navigates to results page using React Router's useNavigate hook with TypeScript. Pass experiment results through navigation state or URL parameters. Include proper TypeScript error boundaries and user feedback for failed experiments.
+

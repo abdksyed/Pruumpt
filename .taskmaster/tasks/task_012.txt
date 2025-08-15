@@ -1,0 +1,43 @@
+# Task ID: 12
+# Title: Add Loading States and Progress Indicators
+# Status: pending
+# Dependencies: 9
+# Priority: medium
+# Description: Implement comprehensive loading states throughout the application using Shadcn/UI loading components
+# Details:
+Add loading spinners using Shadcn/UI Spinner component and progress indicators for API calls with TypeScript interfaces for loading states. Implement skeleton loading for results table using Shadcn/UI Skeleton component. Add progress tracking for batch experiments with multiple placeholder values using TypeScript to track completion states. Integrate with Vite's development environment for optimal loading performance.
+
+# Test Strategy:
+Verify Shadcn/UI loading states provide good user feedback during operations and TypeScript ensures proper loading state management
+
+# Subtasks:
+## 1. Create Core Loading State TypeScript Interfaces [pending]
+### Dependencies: None
+### Description: Define comprehensive TypeScript interfaces for loading states across the application
+### Details:
+Create src/types/loading.ts file with interfaces for LoadingState, ApiRequestState, BatchExperimentProgress, and SkeletonTableState. Include union types for different loading phases (idle, loading, success, error). Define generic interfaces that can be reused across components for type safety.
+
+## 2. Install and Configure Shadcn/UI Loading Components [pending]
+### Dependencies: 12.1
+### Description: Add Shadcn/UI Spinner and Skeleton components to the project
+### Details:
+Use shadcn-ui CLI to install Spinner and Skeleton components: 'npx shadcn@latest add spinner skeleton'. Create src/components/ui/spinner.tsx and src/components/ui/skeleton.tsx. Configure with appropriate TypeScript props and Tailwind CSS styling consistent with existing button component patterns.
+
+## 3. Implement API Loading States with Progress Indicators [pending]
+### Dependencies: 12.1, 12.2
+### Description: Create reusable loading components for API calls with progress tracking
+### Details:
+Create src/components/loading/ApiLoadingSpinner.tsx and src/components/loading/ProgressIndicator.tsx components. Implement spinner overlay for API calls and progress bars for batch operations. Use TypeScript interfaces from subtask 1 and integrate with Shadcn/UI components. Include percentage display and estimated time remaining for batch experiments.
+
+## 4. Create Skeleton Loading for Results Table [pending]
+### Dependencies: 12.2, 12.3
+### Description: Implement skeleton loading placeholder for experiment results table
+### Details:
+Create src/components/loading/TableSkeleton.tsx component using Shadcn/UI Skeleton. Design skeleton that matches expected table structure with placeholder rows, columns, and headers. Make configurable for different row counts and column structures. Use TypeScript to define props for customization (rows, columns, showHeaders).
+
+## 5. Integrate Loading States with Application Components [pending]
+### Dependencies: 12.3, 12.4
+### Description: Connect loading components to main application pages and experiment workflow
+### Details:
+Update existing components to use new loading states. Add loading indicators to experiment execution flow, configuration forms, and results display. Implement loading state management in components that will handle API calls. Ensure proper TypeScript integration and follow existing component patterns in the codebase. Test with Vite's development environment for optimal performance.
+

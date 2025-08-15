@@ -1,0 +1,37 @@
+# Task ID: 14
+# Title: Add Basic Experiment History
+# Status: pending
+# Dependencies: 12
+# Priority: low
+# Description: Implement simple local storage of recent experiments for user convenience with TypeScript data structures
+# Details:
+Store recent experiments in localStorage with TypeScript interfaces for data serialization. Save configurations and results with proper type definitions. Add simple UI using Shadcn/UI components to view and reload previous experiments. Limit storage to prevent excessive browser storage usage with TypeScript-enforced data validation and cleanup logic.
+
+# Test Strategy:
+Verify experiments are saved locally with proper TypeScript type safety, can be retrieved correctly, and Shadcn/UI components display history appropriately
+
+# Subtasks:
+## 1. Create TypeScript interfaces for experiment history [pending]
+### Dependencies: None
+### Description: Define TypeScript interfaces for storing experiment history data in local storage
+### Details:
+
+
+## 2. Implement local storage service with TypeScript [pending]
+### Dependencies: None
+### Description: Create a service for saving and retrieving experiment history from browser local storage
+### Details:
+
+
+## 3. Create history UI component with Shadcn/UI [pending]
+### Dependencies: None
+### Description: Build a history display component using Shadcn/UI components to show recent experiments
+### Details:
+
+
+## 4. Integrate history with experiment execution flow [pending]
+### Dependencies: None
+### Description: Connect experiment history saving to the main experiment execution workflow
+### Details:
+
+

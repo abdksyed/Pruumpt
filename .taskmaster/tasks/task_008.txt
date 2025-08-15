@@ -1,0 +1,43 @@
+# Task ID: 8
+# Title: Create Results Comparison Page
+# Status: pending
+# Dependencies: 7
+# Priority: high
+# Description: Build side-by-side tabular view for experiment results with streaming support using Shadcn/UI components
+# Details:
+Create ResultsPage component using Shadcn/UI Table component with TypeScript interfaces for result data. Implement responsive table/grid layout with proper TypeScript types. Each configuration gets its own column displaying generated text, token usage, cost, and latency with strongly-typed data structures. Implement streaming results display using Shadcn/UI loading components for in-progress requests. Handle individual error states per column with TypeScript error type definitions.
+
+# Test Strategy:
+Verify results display correctly in Shadcn/UI table columns, loading states work properly, errors are handled per configuration, and TypeScript ensures data integrity
+
+# Subtasks:
+## 1. Create ResultsPage component base structure [pending]
+### Dependencies: None
+### Description: Create the main ResultsPage component file with TypeScript interfaces and basic component structure
+### Details:
+Create src/pages/ResultsPage.tsx with TypeScript interfaces for ExperimentResult, ConfigurationResult, and StreamingState types. Define interfaces for generated text, token usage, cost, and latency data. Set up basic functional component structure with proper TypeScript typing following existing project patterns observed in src/components/ui/button.tsx.
+
+## 2. Install and configure Shadcn/UI Table component [pending]
+### Dependencies: 8.1
+### Description: Install the Shadcn/UI Table component and create reusable table structure for results display
+### Details:
+Run npx shadcn@latest add table to install Table, TableBody, TableCell, TableHead, TableHeader, TableRow components. Create src/components/ui/table.tsx following the Shadcn/UI pattern similar to existing button.tsx. Configure table with responsive design using Tailwind CSS classes that match the project's existing styling patterns.
+
+## 3. Implement side-by-side column layout for configurations [pending]
+### Dependencies: 8.2
+### Description: Build the responsive table layout where each configuration gets its own column displaying results
+### Details:
+Implement table structure with dynamic columns based on configuration count (1-8 configurations as specified in Task 2). Each column shows configuration name in header and result data in cells. Use CSS Grid or Flexbox for responsive behavior with horizontal scrolling for many configurations. Apply proper TypeScript types for configuration props and column data structures.
+
+## 4. Add streaming support with loading states [pending]
+### Dependencies: 8.3
+### Description: Implement streaming results display using Shadcn/UI loading components for in-progress requests
+### Details:
+Install and configure npx shadcn@latest add skeleton for loading components. Create streaming state management with TypeScript types for pending, loading, complete, and error states. Implement skeleton loaders for each result cell during streaming. Add real-time updates capability for displaying partial results as they stream in. Use React state management for tracking streaming status per configuration column.
+
+## 5. Implement error handling and result data display [pending]
+### Dependencies: 8.4
+### Description: Add individual error states per column and display complete result data including generated text, token usage, cost, and latency
+### Details:
+Create TypeScript error type definitions for different error scenarios (API errors, timeout, validation). Implement error boundary components for individual columns so one failing configuration doesn't break others. Display complete result data with proper formatting for text (with text wrapping), numerical values for tokens/cost/latency with appropriate units. Add error retry mechanisms and clear error messaging using existing project's styling patterns with Tailwind CSS.
+
