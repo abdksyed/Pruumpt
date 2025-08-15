@@ -39,7 +39,7 @@
               "1.2"
             ],
             "details": "Wrap the App component in BrowserRouter in src/main.tsx. Create Routes and Route components in App.tsx for the three main pages: /config (ConfigurationPage), /prompts (PromptsPage), and /results (ResultsPage). Include proper TypeScript imports and route typing.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test that navigation to each URL renders the correct page component and browser URL updates properly"
           },
           {
@@ -50,7 +50,7 @@
               "1.3"
             ],
             "details": "Create src/components/Layout.tsx component with navigation using Shadcn/UI Button components and Link components from react-router-dom. Include navigation for Configuration, Prompts, and Results pages. Use consistent styling with existing Shadcn/UI button variants and proper TypeScript interfaces for navigation props.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Verify navigation buttons properly route between pages, active states work correctly, and all Shadcn/UI components render with proper styling"
           },
           {
@@ -61,7 +61,7 @@
               "1.4"
             ],
             "details": "Update vite.config.ts to include fallback routing for SPA mode (historyApiFallback). Refactor App.tsx to use the Layout component and wrap route definitions properly. Ensure the routing structure supports both development and production builds with proper TypeScript configuration.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test that direct URL navigation works in both dev and build modes, page refreshes maintain correct routes, and TypeScript compilation passes without routing-related errors"
           }
         ]
@@ -1010,11 +1010,92 @@
             "testStrategy": "Verify production builds are optimized for size and speed, TypeScript compilation is efficient, assets are properly compressed, and loading performance meets targets"
           }
         ]
+      },
+      {
+        "id": 16,
+        "title": "Add Comprehensive Playwright End-to-End Testing Framework",
+        "description": "Set up Playwright testing framework with TypeScript support for comprehensive end-to-end testing of React application including navigation, forms, API integration, and visual regression testing.",
+        "details": "Install Playwright with TypeScript support using 'npm create playwright@latest' and configure for React testing. Set up playwright.config.ts with browser configurations (chromium, firefox, webkit), base URL pointing to Vite dev server, and CI-friendly settings including headless mode and video recording on failure. Create test directory structure with page object models for Configuration, Prompts, and Results pages using TypeScript classes. Implement navigation tests verifying React Router functionality between all three pages. Create form interaction tests for model configuration using Playwright's form filling capabilities and Shadcn/UI component selectors. Set up visual regression testing with Playwright's screenshot comparison features for responsive design verification. Create test utilities for common patterns like waiting for Shadcn/UI components to load, handling async operations, and setting up test data. Configure test data management with fixtures and mock API responses for isolated testing. Add error boundary testing by triggering error states and verifying proper error handling. Integrate with Vite's test environment and configure parallel test execution. Set up CI commands in package.json including 'test:e2e', 'test:e2e:headed', and 'test:e2e:debug'. Create GitHub Actions workflow for automated testing on pull requests.",
+        "testStrategy": "Verify Playwright installation and configuration works with TypeScript compilation. Test navigation flows between all pages work correctly. Validate form interactions with model configuration controls including dropdowns, sliders, and checkboxes. Confirm visual regression tests capture screenshots and detect UI changes. Test error boundary functionality triggers appropriate error displays. Verify CI pipeline runs tests successfully in headless mode. Test responsive design across different viewport sizes. Validate API mocking works for isolated testing scenarios.",
+        "status": "pending",
+        "dependencies": [
+          1,
+          3,
+          8
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Install and Configure Playwright with TypeScript",
+            "description": "Run 'npm create playwright@latest' to install Playwright with TypeScript support and configure initial setup for React testing",
+            "dependencies": [],
+            "details": "Execute npm create playwright@latest command to install Playwright with TypeScript configuration. Accept default settings for browsers (chromium, firefox, webkit) and TypeScript support. This will create initial playwright.config.ts file and tests directory structure.",
+            "status": "done",
+            "testStrategy": "Verify Playwright installation by running 'npx playwright --version' and checking that playwright.config.ts file is created with TypeScript configuration"
+          },
+          {
+            "id": 2,
+            "title": "Configure Playwright Config for React/Vite Integration",
+            "description": "Set up playwright.config.ts with browser configurations, base URL pointing to Vite dev server, and CI-friendly settings",
+            "dependencies": [
+              "16.1"
+            ],
+            "details": "Configure playwright.config.ts with multiple browser projects (chromium, firefox, webkit), set baseURL to 'http://localhost:5173' for Vite dev server, enable headless mode for CI, configure video recording on failure, set up parallel test execution, and add timeout configurations suitable for React application testing.",
+            "status": "pending",
+            "testStrategy": "Test configuration by running a simple test that navigates to the base URL and verifies the page loads correctly across all configured browsers"
+          },
+          {
+            "id": 3,
+            "title": "Create Page Object Models for React Pages",
+            "description": "Build TypeScript page object model classes for Configuration, Prompts, and Results pages with navigation and interaction methods",
+            "dependencies": [
+              "16.2"
+            ],
+            "details": "Create tests/page-objects/ directory with TypeScript classes: ConfigurationPage.ts, PromptsPage.ts, and ResultsPage.ts. Each class should include navigation methods, element selectors for Shadcn/UI components, form interaction methods, and assertion helpers. Use TypeScript interfaces to define page interaction contracts.",
+            "status": "pending",
+            "testStrategy": "Create basic tests that instantiate each page object model and verify navigation methods work correctly with proper TypeScript compilation"
+          },
+          {
+            "id": 4,
+            "title": "Implement Navigation and Routing Tests",
+            "description": "Create comprehensive tests for React Router navigation between Configuration, Prompts, and Results pages",
+            "dependencies": [
+              "16.3"
+            ],
+            "details": "Build tests/navigation.spec.ts with test cases for: navigation between all three pages using browser navigation, URL verification for each route, default route redirect to /config, browser back/forward button functionality, and direct URL navigation. Use page object models for consistent navigation patterns.",
+            "status": "pending",
+            "testStrategy": "Run navigation tests across all browsers to verify React Router functionality works correctly and URLs update properly during navigation"
+          },
+          {
+            "id": 5,
+            "title": "Create Form Interaction and Component Tests",
+            "description": "Develop tests for form interactions using Shadcn/UI component selectors and Playwright form automation",
+            "dependencies": [
+              "16.3"
+            ],
+            "details": "Create tests/forms.spec.ts with test cases for model configuration forms, prompt textarea interactions, variable input handling, and Shadcn/UI component interactions (buttons, inputs, dropdowns). Include tests for form validation, data persistence, and error states using Playwright's form filling capabilities.",
+            "status": "pending",
+            "testStrategy": "Verify form interactions work correctly with proper data validation, error handling, and that Shadcn/UI components respond appropriately to user input"
+          },
+          {
+            "id": 6,
+            "title": "Set Up Visual Regression and CI Integration",
+            "description": "Configure visual regression testing with screenshot comparison and create GitHub Actions workflow for automated testing",
+            "dependencies": [
+              "16.4",
+              "16.5"
+            ],
+            "details": "Set up tests/visual.spec.ts with screenshot comparison tests for responsive design verification across different viewport sizes. Configure Playwright's screenshot comparison features with update workflows. Create .github/workflows/playwright.yml for automated testing on pull requests. Add package.json scripts: 'test:e2e', 'test:e2e:headed', and 'test:e2e:debug'. Include test data management with fixtures and mock API responses.",
+            "status": "pending",
+            "testStrategy": "Verify visual regression tests capture screenshots correctly and GitHub Actions workflow runs tests successfully on pull requests with proper artifact storage"
+          }
+        ]
       }
     ],
     "metadata": {
       "created": "2025-08-13T19:23:25.155Z",
-      "updated": "2025-08-15T06:08:17.078Z",
+      "updated": "2025-08-15T07:27:49.929Z",
       "description": "Tasks for master context"
     }
   }
